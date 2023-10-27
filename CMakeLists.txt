@@ -3,4 +3,8 @@ project(Swarmies)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(Swarmies main.cpp)
+file(COPY Assets DESTINATION ${CMAKE_BINARY_DIR})
+
+add_executable(Swarmies main.cpp
+        Systems/Geometry/Geometry.cpp
+        Systems/Geometry/Geometry.h)
