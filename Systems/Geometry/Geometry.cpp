@@ -32,6 +32,7 @@ void FindExtremafromObj(
     *elevmax = -FLT_MAX;
 
     float mov, depth, elev;
+
     while (std::fgets(buf, sizeof buf, file) != nullptr) {
         if(buf[1] == 'n') {
             break;
@@ -40,6 +41,7 @@ void FindExtremafromObj(
             continue;
         }
         sscanf(buf, "v %f %f %f\n", &mov, &elev, &depth);
+
         if(mov < *movmin) *movmin = mov;
         if(mov > *movmax) *movmax = mov;
         if(elev < *elevmin) *elevmin = elev;
@@ -58,12 +60,16 @@ void FindExtremafromObj(
 
 #ifndef NDEBUG
 void testFindExtremafromObj(const char * path) {
+
     std::FILE * file = std::fopen(path, "rb");
+
     float movmin, movmax, depthmin, depthmax, elevmin, elevmax;
+
     FindExtremafromObj(file,
-   &movmin, &movmax,
-   &depthmin, &depthmax,
-   &elevmin, &elevmax);
+        &movmin, &movmax,
+        &depthmin, &depthmax,
+        &elevmin, &elevmax);
+
     assert(movmin == -3.233417f);
     assert(movmax == 2.898613f);
     assert(depthmin == -12.474690f);
