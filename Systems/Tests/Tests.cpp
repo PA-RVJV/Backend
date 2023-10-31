@@ -5,8 +5,11 @@
 #include <iostream>
 
 #include "Tests.h"
+#include "IUnityLog.h"
 
+extern IUnityLog* unityLog;
 
 extern "C" UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API float SayHello() {
-    return 42;
+    UNITY_LOG(unityLog, "tata");
+    return 24;
 }
