@@ -24,8 +24,6 @@ add_executable(Swarmies main.cpp
         BusinessLogic/PlayGame.cpp
         BusinessLogic/PlayGame.hpp
         Frontends/IPlayGame.hpp
-        tests.cpp
-        tests.hpp
         BusinessObjects/GameLevel.hpp
         BusinessObjects/Mobile.hpp
         BusinessObjects/Mesh.hpp
@@ -37,6 +35,16 @@ add_executable(Swarmies main.cpp
 add_library(UnityGlue SHARED
         Frontends/Unity3d/UnityGlue.cpp
         Frontends/IPlayGame.hpp
+)
+
+add_executable(Tests
+        tests.cpp
+        BusinessObjects/TRepository.tpp
+        BusinessObjects/TRelations.tpp
+        BusinessObjects/Mesh.hpp
+        BusinessObjects/Mobile.hpp
+        BusinessObjects/Mesh.cpp
+        BusinessObjects/Geometry/Geometry.cpp
 )
 
 target_include_directories(UnityGlue PUBLIC "/Applications/Unity/Hub/Editor/${UNITY_VERSION}/Unity.app/Contents/PluginAPI")

@@ -30,7 +30,6 @@ namespace Swarmies {
 
 #endif //SWARMIES_TREPOSITORY_HPP
 
-#ifdef SWARMIES_TESTING
 #include <cassert>
 #include <iostream>
 
@@ -47,4 +46,3 @@ void testRepoWorks() {
 
     std::cout << "Repo works" << std::endl;
 }
-#endif
