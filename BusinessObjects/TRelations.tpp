@@ -11,8 +11,8 @@ namespace Swarmies {
 
     template<typename T1, typename T2>
     class TRelation {
-        std::unordered_map<std::string, std::unordered_map<std::string, T2>> a_to_b;
-        std::unordered_map<std::string, std::unordered_map<std::string, T1>> b_to_a;
+        std::unordered_map<std::string, std::unordered_map<std::string, T2&>> a_to_b;
+        std::unordered_map<std::string, std::unordered_map<std::string, T1&>> b_to_a;
     public:
         struct Payload {
             T1 a;
