@@ -13,8 +13,6 @@ namespace Swarmies {
     class TRelation {
         std::unordered_map<std::string, std::unordered_map<std::string, T2>> a_to_b;
         std::unordered_map<std::string, std::unordered_map<std::string, T1>> b_to_a;
-
-        friend class Test;
     public:
         struct Payload {
             T1 a;
@@ -44,9 +42,7 @@ namespace Swarmies {
             }
         }
 
-        //class Test {
-            static void testRelations();
-        //};
+        static void testRelations();
     };
 }
 
@@ -56,8 +52,9 @@ namespace Swarmies {
 #include "Mesh.hpp"
 #include "Mobile.hpp"
 
-template<> void Swarmies::TRelation<Swarmies::Mesh, Swarmies::Mobile>::testRelations() {
-    auto meshMobRelation = Swarmies::TRelation<Swarmies::Mesh, Swarmies::Mobile>();
+template<typename T1, typename T2>
+void Swarmies::TRelation<T1, T2>::testRelations() {
+    auto meshMobRelation = Swarmies::TRelation<T1, T2>();
 
     assert(meshMobRelation.a_to_b.empty());
     assert(meshMobRelation.b_to_a.empty());
