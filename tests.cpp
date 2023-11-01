@@ -13,5 +13,5 @@
 void test() {
     testFindExtremafromObj("Assets/test_topo.obj");
     testRepoWorks();
-    Swarmies::TRelation<Swarmies::Mesh, Swarmies::Mobile>().testRelations();
+    Swarmies::TRelation<Swarmies::Mesh, Swarmies::Mobile>::testRelations();
 }

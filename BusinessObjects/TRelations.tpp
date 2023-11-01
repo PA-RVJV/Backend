@@ -15,15 +15,13 @@ namespace Swarmies {
         std::unordered_map<std::string, std::unordered_map<std::string, T1&>> b_to_a;
     public:
         struct Payload {
-            T1 a;
-            T2 b;
+            T1& a;
+            T2& b;
         };
 
         void create(Payload payload) {
-            auto mob_map = a_to_b[payload.a.name];
-            auto mesh_map = b_to_a[payload.b.name];
-            mob_map.insert({payload.b.name, payload.b});
-            mesh_map.insert({payload.a.name, payload.a});
+            a_to_b[payload.a.name].insert({payload.b.name, payload.b});
+            b_to_a[payload.b.name].insert({payload.a.name, payload.a});
         }
 
         void remove(Payload payload) {
@@ -59,8 +57,9 @@ void Swarmies::TRelation<T1, T2>::testRelations() {
     assert(meshMobRelation.a_to_b.empty());
     assert(meshMobRelation.b_to_a.empty());
 
-    Swarmies::Mesh mesh {"mesh"};
-    Swarmies::Mobile mobile {"mob"};
+    Swarmies::Mesh mesh {"mesh1"};
+    Swarmies::Mesh mesh2 {"mesh2"};
+    Swarmies::Mobile mobile {"mob1"};
 
     meshMobRelation.create({mesh, mobile});
 
@@ -71,6 +70,20 @@ void Swarmies::TRelation<T1, T2>::testRelations() {
 
     assert(meshMobRelation.a_to_b.empty());
     assert(meshMobRelation.b_to_a.empty());
+
+    meshMobRelation.create({mesh, mobile});
+    meshMobRelation.create({mesh2, mobile});
+
+    assert(meshMobRelation.a_to_b.size() == 2);
+    assert(meshMobRelation.b_to_a.size() == 1);
+    {
+        auto meshes = meshMobRelation.b_to_a["mob1"];
+        assert(meshes.size() == 2);
+
+        auto mob = meshMobRelation.a_to_b["mesh1"];
+        assert(mob.size() == 1);
+        //assert(mob["mob1"].name == "mob1");
+    }
 
     std::cout << "Relations work" << std::endl;
 }
