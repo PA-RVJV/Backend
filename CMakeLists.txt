@@ -19,14 +19,27 @@ file(COPY Assets DESTINATION ${CMAKE_BINARY_DIR})
 
 
 add_executable(Swarmies main.cpp
-        Systems/Geometry/Geometry.cpp
-        Systems/Geometry/Geometry.h)
+        BusinessObjects/Geometry/Geometry.cpp
+        BusinessObjects/Geometry/Geometry.hpp
+        BusinessLogic/PlayGame.cpp
+        BusinessLogic/PlayGame.hpp
+        Frontends/IPlayGame.hpp
+        tests.cpp
+        tests.hpp
+        BusinessObjects/GameLevel.hpp
+        BusinessObjects/Mobile.hpp
+        BusinessObjects/Mesh.hpp
+        BusinessObjects/Relations/MobileMeshes.hpp
+        BusinessObjects/Relations/MobileMeshes.cpp
+        BusinessObjects/Mesh.cpp
+        BusinessObjects/TRepository.tpp
+        BusinessObjects/TRelations.tpp
+)
 
 add_library(UnityGlue SHARED
-        Frontends/Unity3d/RegisterUnityCallbacks.cpp
-        Frontends/Unity3d/RegisterUnityCallbacks.h
-        Systems/Tests/Tests.cpp
-        Systems/Tests/Tests.h)
+        Frontends/Unity3d/UnityGlue.cpp
+        Frontends/IPlayGame.hpp
+)
 
 target_include_directories(UnityGlue PUBLIC "/Applications/Unity/Hub/Editor/${UNITY_VERSION}/Unity.app/Contents/PluginAPI")
 

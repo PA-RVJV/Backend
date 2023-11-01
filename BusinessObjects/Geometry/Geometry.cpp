@@ -8,7 +8,7 @@
 // of vertices existing in them
 //
 
-#include "Geometry.h"
+#include "Geometry.hpp"
 #include <cstdio>
 #include <cfloat>
 

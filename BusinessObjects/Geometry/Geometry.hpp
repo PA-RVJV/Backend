@@ -2,8 +2,8 @@
 // Created by ivo on 27/10/2023.
 //
 
-#ifndef SWARMIES_GEOMETRY_H
-#define SWARMIES_GEOMETRY_H
+#ifndef SWARMIES_GEOMETRY_HPP
+#define SWARMIES_GEOMETRY_HPP
 
 #include <cstdio>
 
@@ -19,4 +19,4 @@ void FindExtremafromObj(
 void testFindExtremafromObj(const char * path);
 #endif
 
-#endif //SWARMIES_GEOMETRY_H
+#endif //SWARMIES_GEOMETRY_HPP

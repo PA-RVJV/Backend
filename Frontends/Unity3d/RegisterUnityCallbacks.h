@@ -1,9 +1,0 @@
-//
-// Created by ivo on 28/10/2023.
-//
-
-#ifndef SWARMIES_REGISTERUNITYCALLBACKS_H
-#define SWARMIES_REGISTERUNITYCALLBACKS_H
-#include "IUnityInterface.h"
-
-#endif //SWARMIES_REGISTERUNITYCALLBACKS_H
