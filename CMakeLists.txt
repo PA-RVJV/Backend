@@ -29,8 +29,6 @@ add_executable(Swarmies main.cpp
         BusinessObjects/GameLevel.hpp
         BusinessObjects/Mobile.hpp
         BusinessObjects/Mesh.hpp
-        BusinessObjects/Relations/MobileMeshes.hpp
-        BusinessObjects/Relations/MobileMeshes.cpp
         BusinessObjects/Mesh.cpp
         BusinessObjects/TRepository.tpp
         BusinessObjects/TRelations.tpp

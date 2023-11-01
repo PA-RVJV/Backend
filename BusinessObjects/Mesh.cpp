@@ -8,6 +8,6 @@
 
 namespace Swarmies {
     Mesh::~Mesh() {
-        std::cout << "Mesh destroyed" << std::endl;
+        std::cout << "Mesh destroyed " << name << std::endl;
     }
 }
