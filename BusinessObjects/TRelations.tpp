@@ -80,9 +80,9 @@ void Swarmies::TRelation<T1, T2>::testRelations() {
         auto meshes = meshMobRelation.b_to_a["mob1"];
         assert(meshes.size() == 2);
 
-        auto mob = meshMobRelation.a_to_b["mesh1"];
-        assert(mob.size() == 1);
-        //assert(mob["mob1"].name == "mob1");
+        auto mobs = meshMobRelation.a_to_b["mesh1"];
+        assert(mobs.size() == 1);
+        assert(mobs.at("mob1").name == "mob1");
     }
 
     std::cout << "Relations work" << std::endl;
