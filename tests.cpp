@@ -9,6 +9,8 @@
 #include "BusinessObjects/TRelations.tpp"
 
 int main(int argc, char * argv[]) {
+
+    puts("\n*** START TESTING ***");
     printf("Test program name %s\n", argv[0]);
     
     testFindExtremafromObj("Assets/test_topo.obj");
