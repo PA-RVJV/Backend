@@ -31,7 +31,9 @@ void FindExtremafromObj(
     *depthmax = -FLT_MAX;
     *elevmax = -FLT_MAX;
 
-    float mov, depth, elev;
+    float mov = 0;
+    float depth = 0;
+    float elev = 0;
 
     while (std::fgets(buf, sizeof buf, file) != nullptr) {
         if(buf[1] == 'n') {
@@ -42,12 +44,12 @@ void FindExtremafromObj(
         }
         sscanf(buf, "v %f %f %f\n", &mov, &elev, &depth);
 
-        if(mov < *movmin) *movmin = mov;
-        if(mov > *movmax) *movmax = mov;
-        if(elev < *elevmin) *elevmin = elev;
-        if(elev > *elevmax) *elevmax = elev;
-        if(depth < *depthmin) *depthmin = depth;
-        if(depth > *depthmax) *depthmax = depth;
+        if(mov < *movmin) { *movmin = mov; }
+        if(mov > *movmax) { *movmax = mov; }
+        if(elev < *elevmin) { *elevmin = elev; }
+        if(elev > *elevmax) { *elevmax = elev; }
+        if(depth < *depthmin) { *depthmin = depth; }
+        if(depth > *depthmax) { *depthmax = depth; }
 
         printf("%f %f %f\n", mov, depth, elev);
     }
@@ -65,10 +67,13 @@ void testFindExtremafromObj(const char * path) {
 
     float movmin, movmax, depthmin, depthmax, elevmin, elevmax;
 
+    const auto FLOAT_EPSILON = FLT_EPSILON;
+
     FindExtremafromObj(file,
         &movmin, &movmax,
         &depthmin, &depthmax,
         &elevmin, &elevmax);
+
 
     assert(movmin == -3.233417f);
     assert(movmax == 2.898613f);
@@ -77,12 +82,12 @@ void testFindExtremafromObj(const char * path) {
     assert(elevmin == -1.0000f);
     assert(elevmax == 2.378370f);
 
-    assert(movmin + -3.233417 < FLT_EPSILON);
-    assert(movmax - 2.898613 < FLT_EPSILON);
-    assert(depthmin + -12.474690 < FLT_EPSILON);
-    assert(depthmax - 1 < FLT_EPSILON);
-    assert(elevmin + -1.0000 < FLT_EPSILON);
-    assert(elevmax - 2.378370 < FLT_EPSILON);
+    assert(movmin + -3.233417 < FLOAT_EPSILON);
+    assert(movmax - 2.898613 < FLOAT_EPSILON);
+    assert(depthmin + -12.474690 < FLOAT_EPSILON);
+    assert(depthmax - 1 < FLOAT_EPSILON);
+    assert(elevmin + -1.0000 < FLOAT_EPSILON);
+    assert(elevmax - 2.378370 < FLOAT_EPSILON);
 
 }
 #endif

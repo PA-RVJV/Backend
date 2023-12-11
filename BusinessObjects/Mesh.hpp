@@ -8,7 +8,7 @@
 #include <string>
 
 namespace Swarmies {
-    struct Mesh{
+    struct Mesh {
         const std::string name;
 
         ~Mesh();

@@ -14,8 +14,10 @@ namespace Swarmies {
         std::unordered_map<std::string, T> map;
 
     public:
-        void add(const std::string &name, T && object) {
-            map[name] = std::move(object);
+        T& add(const std::string &name, T && object) {
+            map[name] = object; // std::move
+
+            return map[name];
         }
 
         void remove(const std::string & name) {
@@ -36,11 +38,16 @@ namespace Swarmies {
 void testRepoWorks() {
     struct Foo {
         std::string name;
+        ~Foo() {
+            std::cout << "destroy foo" << std::endl;
+        }
     } foo {"foo"};
-    auto repo = Swarmies::TRepository<Foo>();
-    repo.add(foo.name, std::move(foo));
 
-    auto foo2 = repo.get("foo");
+    auto repo = Swarmies::TRepository<Foo>();
+    auto &f = repo.add(foo.name, std::move(foo));
+    assert(f.name == "foo" && "foo name must be foo");
+
+    auto &foo2 = repo.get("foo");
 
     assert(foo2.name == "foo" && "foo name must be foo");
 

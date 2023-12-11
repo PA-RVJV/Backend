@@ -2,11 +2,15 @@
 // Created by ivo on 01/11/2023.
 //
 
+#include <cstdio>
+
 #include "BusinessObjects/Geometry/Geometry.hpp"
 #include "BusinessObjects/TRepository.tpp"
 #include "BusinessObjects/TRelations.tpp"
 
-int main() {
+int main(int argc, char * argv[]) {
+    printf("Test program name %s\n", argv[0]);
+    
     testFindExtremafromObj("Assets/test_topo.obj");
     testRepoWorks();
     Swarmies::TRelation<Swarmies::Mesh, Swarmies::Mobile>::testRelations();
