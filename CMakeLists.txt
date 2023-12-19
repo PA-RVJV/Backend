@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 23)
 # on veut que nos programmes puissent modifier
 # les fichiers sur lequel on travaille
 # une fois build
-file(COPY Assets DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY Assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 add_executable(Swarmies_Server main.cpp
         BusinessObjects/Geometry/Geometry.cpp
@@ -38,8 +38,8 @@ add_executable(TestsSwarmiesServer
 )
 
 #option(UNITY_VERSION "The folder name of the unity editor you use" -1)
-set(UNITY_VERSION "-1" CACHE STRING "The folder name of the unity editor you use")
-set(UNITY_PROJECT_FOLDER "-1" CACHE STRING "The folder where the plugin should be copied to")
+set(UNITY_VERSION "2022.3.13f1" CACHE STRING "The folder name of the unity editor you use")
+set(UNITY_PROJECT_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/../UnityFront" CACHE STRING "The folder where the plugin should be copied to")
 
 if(UNITY_VERSION EQUAL -1)
     message(FATAL_ERROR "You must specify the unity version you use")
