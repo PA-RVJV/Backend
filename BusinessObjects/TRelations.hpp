@@ -50,10 +50,11 @@ namespace Swarmies {
 #include "Mesh.hpp"
 #include "Mobile.hpp"
 
-template<typename T1, typename T2>
-void Swarmies::TRelation<T1, T2>::testRelations() {
-    auto meshMobRelation = Swarmies::TRelation<T1, T2>();
+template<> void Swarmies::TRelation<Swarmies::Mesh, Swarmies::Mobile>::testRelations() {
 
+    auto meshMobRelation = Swarmies::TRelation<Swarmies::Mesh, Swarmies::Mobile>();
+
+    // test that our relations tables are empty
     assert(meshMobRelation.a_to_b.empty());
     assert(meshMobRelation.b_to_a.empty());
 
@@ -63,16 +64,19 @@ void Swarmies::TRelation<T1, T2>::testRelations() {
 
     meshMobRelation.create({mesh, mobile});
 
+    // our relation created an entry
     assert(meshMobRelation.a_to_b.size() == 1);
     assert(meshMobRelation.b_to_a.size() == 1);
 
     meshMobRelation.remove({mesh, mobile});
 
+    // remove acted on both tables
     assert(meshMobRelation.a_to_b.empty());
     assert(meshMobRelation.b_to_a.empty());
 
     meshMobRelation.create({mesh, mobile});
     meshMobRelation.create({mesh2, mobile});
+
 
     assert(meshMobRelation.a_to_b.size() == 2);
     assert(meshMobRelation.b_to_a.size() == 1);

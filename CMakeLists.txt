@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 23)
 # on veut que nos programmes puissent modifier
 # les fichiers sur lequel on travaille
 # une fois build
-file(COPY Assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+#file(COPY Assets DESTINATION $<TARGET_FILE_DIR:TestsSwarmiesServer>)
 
 add_executable(Swarmies_Server main.cpp
         BusinessObjects/Geometry/Geometry.cpp
@@ -18,8 +18,8 @@ add_executable(Swarmies_Server main.cpp
         BusinessObjects/Mobile.hpp
         BusinessObjects/Mesh.hpp
         BusinessObjects/Mesh.cpp
-        BusinessObjects/TRepository.tpp
-        BusinessObjects/TRelations.tpp
+        BusinessObjects/TRepository.hpp
+        BusinessObjects/TRelations.hpp
 )
 
 add_library(UnityGlue SHARED
@@ -29,15 +29,22 @@ add_library(UnityGlue SHARED
 
 add_executable(TestsSwarmiesServer
         tests.cpp
-        BusinessObjects/TRepository.tpp
-        BusinessObjects/TRelations.tpp
+        BusinessObjects/TRepository.hpp
+        BusinessObjects/TRelations.hpp
         BusinessObjects/Mesh.hpp
         BusinessObjects/Mobile.hpp
         BusinessObjects/Mesh.cpp
         BusinessObjects/Geometry/Geometry.cpp
 )
+add_custom_command(TARGET TestsSwarmiesServer POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
+        "${CMAKE_CURRENT_SOURCE_DIR}/Assets"
+        $<TARGET_FILE_DIR:TestsSwarmiesServer>/Assets)
 
-#option(UNITY_VERSION "The folder name of the unity editor you use" -1)
+#get_target_property(otp TestsSwarmiesServer RUNTIME_OUTPUT_DIRECTORY_DEBUG)
+set(otp "")
+message(STATUS "Output dir ${otp}")
+
 set(UNITY_VERSION "2022.3.13f1" CACHE STRING "The folder name of the unity editor you use")
 set(UNITY_PROJECT_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/../UnityFront" CACHE STRING "The folder where the plugin should be copied to")
 
@@ -49,7 +56,9 @@ if(UNITY_PROJECT_FOLDER EQUAL -1)
     message(FATAL_ERROR "You must specify the folder where the plugin should be copied to")
 endif ()
 
-target_include_directories(UnityGlue PUBLIC "/Applications/Unity/Hub/Editor/${UNITY_VERSION}/Unity.app/Contents/PluginAPI")
+target_include_directories(
+        UnityGlue PUBLIC "/Applications/Unity/Hub/Editor/${UNITY_VERSION}/Unity.app/Contents/PluginAPI"
+)
 
 target_link_libraries(Swarmies_Server UnityGlue)
 

@@ -61,9 +61,12 @@ void FindExtremafromObj(
 }
 
 #ifndef NDEBUG
+#include <string>
 void testFindExtremafromObj(const char * path) {
 
     std::FILE * file = std::fopen(path, "rb");
+    if(file == nullptr) assert(0 && (std::string("Can't open ") + path + ".").c_str());
+    
 
     float movmin, movmax, depthmin, depthmax, elevmin, elevmax;
 

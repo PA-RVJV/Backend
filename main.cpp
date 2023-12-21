@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "BusinessObjects/TRepository.tpp"
-#include "BusinessObjects/TRelations.tpp"
+#include "BusinessObjects/TRepository.hpp"
+#include "BusinessObjects/TRelations.hpp"
 #include "BusinessObjects/Mesh.hpp"
 #include "BusinessObjects/Mobile.hpp"
 

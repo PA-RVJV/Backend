@@ -32,7 +32,7 @@ UnityPluginLoad(IUnityInterfaces* unityInterfaces)
     auto * graphics = unityInterfaces->Get<IUnityGraphics>();
     unityLog = unityInterfaces->Get<IUnityLog>();
 
-    UNITY_LOG(unityLog, "toto");
+    UNITY_LOG(unityLog, "loded unity glue");
 }
 
 extern "C" void UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API
@@ -40,11 +40,11 @@ UnityPluginUnload()
 {
     unityLog = nullptr;
 
-    //UNITY_LOG(unityLog, "toto");
+    UNITY_LOG(unityLog, "unload unity glue");
 }
 
 extern "C" UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API float SayHello() {
-    UNITY_LOG(unityLog, "tata");
+    UNITY_LOG(unityLog, "say hello from glue");
     return 24;
 }
 

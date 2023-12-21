@@ -6,6 +6,7 @@
 #define SWARMIES_IPLAYGAME_HPP
 
 class IPlayGame {
+    virtual void LoadMesh() = 0;
     virtual void LoadLevel() = 0;
 };
 

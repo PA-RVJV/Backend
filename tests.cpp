@@ -5,8 +5,8 @@
 #include <cstdio>
 
 #include "BusinessObjects/Geometry/Geometry.hpp"
-#include "BusinessObjects/TRepository.tpp"
-#include "BusinessObjects/TRelations.tpp"
+#include "BusinessObjects/TRepository.hpp"
+#include "BusinessObjects/TRelations.hpp"
 
 int main(int argc, char * argv[]) {
 
