@@ -66,7 +66,6 @@ void testFindExtremafromObj(const char * path) {
 
     std::FILE * file = std::fopen(path, "rb");
     if(file == nullptr) assert(0 && (std::string("Can't open ") + path + ".").c_str());
-    
 
     float movmin, movmax, depthmin, depthmax, elevmin, elevmax;
 
@@ -76,7 +75,6 @@ void testFindExtremafromObj(const char * path) {
         &movmin, &movmax,
         &depthmin, &depthmax,
         &elevmin, &elevmax);
-
 
     assert(movmin == -3.233417f);
     assert(movmax == 2.898613f);

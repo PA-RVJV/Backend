@@ -18,8 +18,11 @@ add_executable(Swarmies_Server main.cpp
         BusinessObjects/Mobile.hpp
         BusinessObjects/Mesh.hpp
         BusinessObjects/Mesh.cpp
-        BusinessObjects/TRepository.hpp
-        BusinessObjects/TRelations.hpp
+        BusinessLogic/TRepository.hpp
+        BusinessLogic/TRelations.hpp
+        BusinessLogic/Ordonanceur.cpp
+        BusinessLogic/Ordonanceur.hpp
+        BusinessLogic/TSemantiqueRelation.hpp
 )
 
 add_library(UnityGlue SHARED
@@ -29,8 +32,8 @@ add_library(UnityGlue SHARED
 
 add_executable(TestsSwarmiesServer
         tests.cpp
-        BusinessObjects/TRepository.hpp
-        BusinessObjects/TRelations.hpp
+        BusinessLogic/TRepository.hpp
+        BusinessLogic/TRelations.hpp
         BusinessObjects/Mesh.hpp
         BusinessObjects/Mobile.hpp
         BusinessObjects/Mesh.cpp

@@ -11,7 +11,7 @@
 
 struct GameLevel {
 
-    std::vector<Mobile> mobiles;
+    std::vector<Swarmies::Mobile> mobiles;
 };
 
 #endif //SWARMIES_GAMELEVEL_HPP

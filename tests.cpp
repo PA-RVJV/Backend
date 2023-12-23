@@ -5,8 +5,8 @@
 #include <cstdio>
 
 #include "BusinessObjects/Geometry/Geometry.hpp"
-#include "BusinessObjects/TRepository.hpp"
-#include "BusinessObjects/TRelations.hpp"
+#include "BusinessLogic/TRepository.hpp"
+#include "BusinessLogic/TRelations.hpp"
 
 int main(int argc, char * argv[]) {
 
@@ -15,5 +15,6 @@ int main(int argc, char * argv[]) {
     
     testFindExtremafromObj("Assets/test_topo.obj");
     testRepoWorks();
+
     Swarmies::TRelation<Swarmies::Mesh, Swarmies::Mobile>::testRelations();
 }

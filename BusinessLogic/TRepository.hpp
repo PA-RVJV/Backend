@@ -11,13 +11,14 @@
 namespace Swarmies {
 
     template<typename T>
-
     class TRepository {
-        std::unordered_map<std::string, const T> map;
+        std::unordered_map<std::string, T> map; // pas <std::string, const T>,
+        // on essayera plus tard avec un repo immutable + systeme de reducteurs
+        // voir les perf que ca donne
 
     public:
         const T& add(const std::string &&name, T && object) {
-            map.emplace(name, std::move(object));
+            map.emplace(name, object);
 
             return map.at(name);
         }
@@ -30,13 +31,15 @@ namespace Swarmies {
             return map.at(name);
         }
 
-        [[nodiscard]] int _capacity() const {
+        auto _size() const {
             return map.size();
         }
     };
 }
 
 #endif //SWARMIES_TREPOSITORY_HPP
+
+#ifndef NDEBUG
 
 #include <cassert>
 #include <iostream>
@@ -50,20 +53,20 @@ void testRepoWorks() {
     };
 
     auto repo = Swarmies::TRepository<Foo>();
+    assert(repo._size() == 0);
+
     auto f = repo.add(
             "toto", Foo{"toto"}
             );
-
     assert(f.name == "toto" && "foo name must be foo");
-    puts("ok1");
 
     auto& foo2= repo.get("toto");
-
     assert(foo2.name == "toto" && "foo name must be foo");
-    puts("ok2");
 
     repo.remove("toto");
-    assert(repo._capacity() == 0 && "Repo should be empty");
+    assert(repo._size() == 0 && "Repo should be empty");
 
     std::cout << "Repo works" << std::endl;
 }
+
+#endif
