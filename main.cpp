@@ -5,6 +5,11 @@
 #include "BusinessObjects/Mesh.hpp"
 #include "BusinessObjects/Mobile.hpp"
 
+constexpr Swarmies::TRepository<Swarmies::Mesh> repos(void) {
+    return Swarmies::TRepository<Swarmies::Mesh>();
+}
+
+
 int main() {
     std::cout << "Hello, World!" << std::endl;
 

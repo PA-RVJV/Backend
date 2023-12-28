@@ -1,5 +1,8 @@
 //
 // Created by ivo on 01/11/2023.
+// C'est l'interface que toutes les "glues"
+// doivent implémenter pour interagir avec
+// le jeu
 //
 
 #ifndef SWARMIES_IPLAYGAME_HPP

@@ -9,20 +9,22 @@ set(CMAKE_CXX_STANDARD 23)
 #file(COPY Assets DESTINATION $<TARGET_FILE_DIR:TestsSwarmiesServer>)
 
 add_executable(Swarmies_Server main.cpp
-        BusinessObjects/Geometry/Geometry.cpp
-        BusinessObjects/Geometry/Geometry.hpp
-        BusinessLogic/PlayGame.cpp
-        BusinessLogic/PlayGame.hpp
+        Swarmies/BusinessObjects/Geometry/Geometry.cpp
+        Swarmies/BusinessObjects/Geometry/Geometry.hpp
+        Engine/BusinessLogic/PlayGame.cpp
+        Engine/BusinessLogic/PlayGame.hpp
         Frontends/IPlayGame.hpp
-        BusinessObjects/GameLevel.hpp
-        BusinessObjects/Mobile.hpp
-        BusinessObjects/Mesh.hpp
-        BusinessObjects/Mesh.cpp
-        BusinessLogic/TRepository.hpp
-        BusinessLogic/TRelations.hpp
-        BusinessLogic/Ordonanceur.cpp
-        BusinessLogic/Ordonanceur.hpp
-        BusinessLogic/TSemantiqueRelation.hpp
+        Swarmies/BusinessObjects/GameLevel.hpp
+        Swarmies/BusinessObjects/Mobile.hpp
+        Swarmies/BusinessObjects/Mesh.hpp
+        Swarmies/BusinessObjects/Mesh.cpp
+        Engine/BusinessLogic/TRepository.hpp
+        Engine/BusinessLogic/TRelations.hpp
+        Engine/BusinessLogic/Ordonanceur.cpp
+        Engine/BusinessLogic/Ordonanceur.hpp
+        Engine/BusinessLogic/TSemantiqueRelation.hpp
+        Swarmies/repositories.cpp
+        Engine/BusinessLogic/Payload.hpp
 )
 
 add_library(UnityGlue SHARED
@@ -32,16 +34,17 @@ add_library(UnityGlue SHARED
 
 add_executable(TestsSwarmiesServer
         tests.cpp
-        BusinessLogic/TRepository.hpp
-        BusinessLogic/TRelations.hpp
-        BusinessObjects/Mesh.hpp
-        BusinessObjects/Mobile.hpp
-        BusinessObjects/Mesh.cpp
-        BusinessObjects/Geometry/Geometry.cpp
+        Engine/BusinessLogic/TRepository.hpp
+        Engine/BusinessLogic/TRelations.hpp
+        Swarmies/BusinessObjects/Mesh.hpp
+        Swarmies/BusinessObjects/Mobile.hpp
+        Swarmies/BusinessObjects/Mesh.cpp
+        Swarmies/BusinessObjects/Geometry/Geometry.cpp
 )
+
 add_custom_command(TARGET TestsSwarmiesServer POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
-        "${CMAKE_CURRENT_SOURCE_DIR}/Assets"
+        "${CMAKE_CURRENT_SOURCE_DIR}/Swarmies/Assets"
         $<TARGET_FILE_DIR:TestsSwarmiesServer>/Assets)
 
 #get_target_property(otp TestsSwarmiesServer RUNTIME_OUTPUT_DIRECTORY_DEBUG)

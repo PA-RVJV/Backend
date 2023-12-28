@@ -8,12 +8,12 @@
 #include <string>
 #include <unordered_map>
 
-namespace Swarmies {
+namespace Engine {
 
     template<typename T>
     class TRepository {
         std::unordered_map<std::string, T> map; // pas <std::string, const T>,
-        // on essayera plus tard avec un repo immutable + systeme de reducteurs
+        // on essayera plus tard avec un repo immutable + système de reducteurs
         // voir les perf que ca donne
 
     public:
@@ -31,7 +31,7 @@ namespace Swarmies {
             return map.at(name);
         }
 
-        auto _size() const {
+        [[nodiscard]] size_t _size() const {
             return map.size();
         }
     };
@@ -52,7 +52,7 @@ void testRepoWorks() {
         }
     };
 
-    auto repo = Swarmies::TRepository<Foo>();
+    auto repo = Engine::TRepository<Foo>();
     assert(repo._size() == 0);
 
     auto f = repo.add(

@@ -5,4 +5,5 @@
 #include "Ordonanceur.hpp"
 
 namespace Swarmies {
+
 } // Swarmies
