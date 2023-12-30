@@ -6,25 +6,53 @@
 #define SOLUTIONSWARMIES_ORDONANCEUR_HPP
 
 #include <array>
+#include <vector>
 
 #include "TRepository.hpp"
 #include "Payload.hpp"
 #include "TSemantiqueRelation.hpp"
 
+template <typename Derived>
+concept IsDerivedFromRepository = std::is_base_of<Engine::RepositoryBase, Derived>::value;
+
 namespace Engine {
 
-    template<typename RepositoryTypes, int NbRepos>
-    class Ordonanceur {
+    /**
+     * La classe qui gere tous les repos, les liens
+     * entre eux et la semantique de la mutation desdits
+     */
+    class Ordonnanceur {
 
     private:
-        std::array<RepositoryTypes, NbRepos> repos;
+        std::vector<RepositoryBase> repos;
+        std::vector<RelationBase> relations;
+        std::vector<SemantiqueRelationBase> semantiques;
 
-        template<class T1>
-        Engine::TSemantiqueRelation getTagRepo();
+        template<class TRepository>
+        Engine::TSemantiqueRelation<TRepository> getTagRepo();
 
     public:
-        template <typename T1, typename T2>
-        void createLink(const Engine::LinkPayload<T1, T2> & payload) {
+        /**
+         * Ajoute un repo a la base
+         * todo: ca serait bien d'avoir une version constexpr
+         *       vu que ca va pas changer au cours de l'exécution
+         *       du programme
+         */
+        void addRepo(RepositoryBase && repo) {
+            repos.push_back(repo);
+        }
+
+        /**
+         * Donne la possibilité de créer des relations entre deux repos
+         * todo: meme remarque qu'au dessus
+         */
+        template <IsDerivedFromRepository T1, IsDerivedFromRepository T2>
+        void addRelation(T1 & r1, T2 & r2) {
+            relations.push_back(TRelation<T1, T2>());
+        }
+
+        template <class TRepository, typename T2>
+        void createLink(const Engine::LinkPayload<TRepository, T2> & payload) {
             addRelations(payload);
             addTags(payload);
         }
@@ -48,18 +76,20 @@ namespace Engine {
         }
 
     public:
-        void demarrer(std::array<RepositoryTypes, NbRepos> repos);
+
+
     };
 
-    template<typename RepositoryTypes, int NbRepos>
-    Engine::TSemantiqueRelation Ordonanceur<RepositoryTypes, NbRepos>::getTagRepo() {
-        return Engine::TSemantiqueRelation<>();
-    }
 }
 
-template<typename RepositoryTypes, int NbRepos>
-void Ordonanceur<typename RepositoryTypes, int NbRepos>::demarrer(std::array<RepositoryTypes, NbRepos> repos) {
-    this->repos = repos;
+#ifndef NDEBUG
+#include <cassert>
+
+void test_ordonnanceur() {
+    auto ordo = Engine::Ordonnanceur();
 }
+
+
+#endif
 
 #endif //SOLUTIONSWARMIES_ORDONANCEUR_HPP

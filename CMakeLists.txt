@@ -73,3 +73,11 @@ add_custom_command(TARGET UnityGlue POST_BUILD COMMAND
         $<TARGET_FILE:UnityGlue> "${UNITY_PROJECT_FOLDER}/Assets/Plugins"
         COMMENT "Copying DLL file to output directory..."
 )
+
+# Arbo plus lisible sous XCode
+source_group("Engine/Source Files" REGULAR_EXPRESSION "Backend/Engine/.+cpp")
+source_group("Engine/Header Files" REGULAR_EXPRESSION "Backend/Engine/.+hpp")
+source_group("Swarmies/Source Files" REGULAR_EXPRESSION "Backend/Swarmies/.+cpp")
+source_group("Swarmies/Header Files" REGULAR_EXPRESSION "Backend/Swarmies/.+hpp")
+source_group("Frontends/Source Files" REGULAR_EXPRESSION "Backend/Frontends/.+cpp")
+source_group("Frontends/Header Files" REGULAR_EXPRESSION "Backend/Frontends/.+hpp")

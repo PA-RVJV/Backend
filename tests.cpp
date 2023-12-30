@@ -7,6 +7,8 @@
 #include "Engine/BusinessLogic/TRepository.hpp"
 #include "Engine/BusinessLogic/TRelations.hpp"
 #include "Engine/BusinessLogic/TSemantiqueRelation.hpp"
+#include "Engine/BusinessLogic/Ordonanceur.hpp"
+
 #include "Swarmies/BusinessObjects/Mesh.hpp"
 #include "Swarmies/BusinessObjects/Geometry/Geometry.hpp"
 #include "Swarmies/BusinessObjects/Mobile.hpp"
@@ -21,4 +23,6 @@ int main(int argc, char * argv[]) {
 
     Engine::TRelation<Swarmies::Mesh, Swarmies::Mobile>::testRelations();
     Engine::TSemantiqueRelation<Swarmies::Mesh, Engine::SemantiqueRelation::Kind::NO_TAG>::testSemantique();
+    
+    test_ordonnanceur();
 }

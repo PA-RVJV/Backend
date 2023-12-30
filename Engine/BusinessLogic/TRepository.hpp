@@ -10,8 +10,13 @@
 
 namespace Engine {
 
+    // Cette classe ne sert que pour pouvoir déclarer un conteneur
+    // de repository, eg std::vector<TRepository<RepositoryBase>>
+    // car on ne peut pas déclarer un std::vector<TRepository>
+    class RepositoryBase {};
+
     template<typename T>
-    class TRepository {
+    class TRepository: RepositoryBase {
         std::unordered_map<std::string, T> map; // pas <std::string, const T>,
         // on essayera plus tard avec un repo immutable + système de reducteurs
         // voir les perf que ca donne
@@ -36,8 +41,6 @@ namespace Engine {
         }
     };
 }
-
-#endif //SWARMIES_TREPOSITORY_HPP
 
 #ifndef NDEBUG
 
@@ -70,3 +73,4 @@ void testRepoWorks() {
 }
 
 #endif
+#endif //SWARMIES_TREPOSITORY_HPP

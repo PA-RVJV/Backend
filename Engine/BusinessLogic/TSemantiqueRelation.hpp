@@ -11,6 +11,9 @@
 
 namespace Engine {
 
+    // ne sert que à typer le vecteur dans l'ordonnanceur
+    struct SemantiqueRelationBase {};
+
     struct SemantiqueRelation {
         enum Kind {
             NO_TAG = 0,
@@ -24,7 +27,7 @@ namespace Engine {
     };
 
     template<typename TEnt, SemantiqueRelation::Kind Trel=SemantiqueRelation::Kind::NO_TAG>
-    class TSemantiqueRelation {
+    class TSemantiqueRelation: SemantiqueRelationBase {
     public: std::unordered_map<std::string, SemantiqueRelation::Kind> tags;
 
 
@@ -32,7 +35,6 @@ namespace Engine {
     };
 }
 
-#endif //SOLUTIONSWARMIES_TSEMANTIQUERELATION_HPP
 
 #ifndef NDEBUG
 
@@ -45,4 +47,5 @@ template<> void Engine::TSemantiqueRelation<Swarmies::Mesh, Engine::SemantiqueRe
 
 }
 
-#endif
+#endif //NDEBUG
+#endif //SOLUTIONSWARMIES_TSEMANTIQUERELATION_HPP

@@ -8,13 +8,16 @@
 
 namespace Engine {
 
+    // ne sert que a typer le vecteur dans l'ordonnanceur
+    class RelationBase {};
+
     /**
      * Soient deux entités A et B, contient toutes les relations entre a's et b's
      * @tparam T1
      * @tparam T2
      */
     template<typename T1, typename T2>
-    class TRelation {
+    class TRelation: RelationBase {
         std::unordered_map<std::string, std::unordered_map<std::string, T2&>> a_to_b;
         std::unordered_map<std::string, std::unordered_map<std::string, T1&>> b_to_a;
     public:
@@ -39,7 +42,6 @@ namespace Engine {
                 b_to_a.erase(b.name);
             }
         }
-
 
         static void testRelations();
     };
