@@ -17,12 +17,14 @@ int main(int argc, char * argv[]) {
 
     puts("\n*** START TESTING ***");
     printf("Test program name %s\n", argv[0]);
-    
+
+#ifndef NDEBUG
     testFindExtremafromObj("Assets/test_topo.obj");
     testRepoWorks();
 
     Engine::TRelation<Swarmies::Mesh, Swarmies::Mobile>::testRelations();
     Engine::TSemantiqueRelation<Swarmies::Mesh, Engine::SemantiqueRelation::Kind::NO_TAG>::testSemantique();
     
-    test_ordonnanceur();
+    Engine::test_ordonnanceur_works();
+#endif
 }

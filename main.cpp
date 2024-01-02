@@ -1,22 +1,19 @@
 #include <iostream>
 
-#include "BusinessLogic/TRepository.hpp"
-#include "BusinessLogic/TRelations.hpp"
-#include "BusinessObjects/Mesh.hpp"
-#include "BusinessObjects/Mobile.hpp"
-
-constexpr Swarmies::TRepository<Swarmies::Mesh> repos(void) {
-    return Swarmies::TRepository<Swarmies::Mesh>();
-}
-
+#include "Engine/BusinessLogic/TRepository.hpp"
+#include "Engine/BusinessLogic/TRelations.hpp"
+#include "Swarmies/BusinessObjects/Mesh.hpp"
+#include "Swarmies/BusinessObjects/Mobile.hpp"
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
 
-    auto meshes = Swarmies::TRepository<Swarmies::Mesh>();
-    auto mobiles = Swarmies::TRepository<Swarmies::Mobile>();
+    auto meshes = Engine::TRepository<Swarmies::Mesh>();
+    auto mobiles = Engine::TRepository<Swarmies::Mobile>();
 
-    auto mesh_mob_relation = Swarmies::TRelation<Swarmies::Mobile, Swarmies::Mesh>();
+    auto mesh_mob_relation = Engine::TRelation<Swarmies::Mobile, Swarmies::Mesh>();
+
+    mobiles.add("monde", Swarmies::Mobile{"monde"});
 
     return 0;
 }

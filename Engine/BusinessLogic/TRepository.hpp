@@ -8,6 +8,10 @@
 #include <string>
 #include <unordered_map>
 
+#ifndef NDEBUG
+void testRepoWorks();
+#endif
+
 namespace Engine {
 
     // Cette classe ne sert que pour pouvoir déclarer un conteneur
@@ -42,35 +46,4 @@ namespace Engine {
     };
 }
 
-#ifndef NDEBUG
-
-#include <cassert>
-#include <iostream>
-
-void testRepoWorks() {
-    struct Foo {
-        std::string name;
-        ~Foo() {
-            std::cout << "destroy foo" << std::endl;
-        }
-    };
-
-    auto repo = Engine::TRepository<Foo>();
-    assert(repo._size() == 0);
-
-    auto f = repo.add(
-            "toto", Foo{"toto"}
-            );
-    assert(f.name == "toto" && "foo name must be foo");
-
-    auto& foo2= repo.get("toto");
-    assert(foo2.name == "toto" && "foo name must be foo");
-
-    repo.remove("toto");
-    assert(repo._size() == 0 && "Repo should be empty");
-
-    std::cout << "Repo works" << std::endl;
-}
-
-#endif
 #endif //SWARMIES_TREPOSITORY_HPP

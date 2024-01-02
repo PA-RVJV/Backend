@@ -7,7 +7,10 @@
 #include "Mesh.hpp"
 
 namespace Swarmies {
-    Mesh::~Mesh() {
-        std::cout << "Mesh destroyed " << name << '\n';
-    }
+//    Mesh::~Mesh() {
+//        std::cout << "Mesh destroyed " << name << '\n';
+//    }
+    //Mesh::Mesh() noexcept: vertices({}) {}
+
+    int Mesh::number_vertices() const {return static_cast<int>(vertices.size()); }
 }

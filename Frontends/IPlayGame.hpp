@@ -8,9 +8,13 @@
 #ifndef SWARMIES_IPLAYGAME_HPP
 #define SWARMIES_IPLAYGAME_HPP
 
+struct VertexWrapper { // this is just so you
+    float vtx[3];
+};
+
 class IPlayGame {
-    virtual void LoadMesh() = 0;
-    virtual void LoadLevel() = 0;
+    virtual void LoadMesh(const char* name, struct VertexWrapper *vw) = 0;
+    virtual void LoadLevel(const char* name) = 0;
 };
 
 #endif //SWARMIES_IPLAYGAME_HPP

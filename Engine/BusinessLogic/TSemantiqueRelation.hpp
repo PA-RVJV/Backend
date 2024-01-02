@@ -6,8 +6,7 @@
 #define SOLUTIONSWARMIES_TSEMANTIQUERELATION_HPP
 
 #include <unordered_map>
-#include "Payload.hpp"
-#include "TRelations.hpp"
+#include <string>
 
 namespace Engine {
 
@@ -28,24 +27,10 @@ namespace Engine {
 
     template<typename TEnt, SemantiqueRelation::Kind Trel=SemantiqueRelation::Kind::NO_TAG>
     class TSemantiqueRelation: SemantiqueRelationBase {
-    public: std::unordered_map<std::string, SemantiqueRelation::Kind> tags;
-
-
+    public:
+        std::unordered_map<std::string, SemantiqueRelation::Kind> tags;
         static void testSemantique();
     };
 }
 
-
-#ifndef NDEBUG
-
-#include <cassert>
-template<> void Engine::TSemantiqueRelation<Swarmies::Mesh, Engine::SemantiqueRelation::Kind::NO_TAG>::testSemantique() {
-
-    auto meshMobRelation = Engine::TSemantiqueRelation<Swarmies::Mesh>();
-
-    assert(meshMobRelation.tags.empty());
-
-}
-
-#endif //NDEBUG
 #endif //SOLUTIONSWARMIES_TSEMANTIQUERELATION_HPP

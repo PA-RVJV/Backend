@@ -9,7 +9,7 @@
 namespace Swarmies {
 
     union RepositoriesTypes {
-        Swarmies::TRepository<Swarmies::Mesh> meshes;
-        Swarmies::TRepository<Swarmies::Mobile> mobiles;
+        Engine::TRepository<Swarmies::Mesh> meshes;
+        Engine::TRepository<Swarmies::Mobile> mobiles;
     };
 }

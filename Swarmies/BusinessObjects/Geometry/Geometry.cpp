@@ -9,6 +9,9 @@
 //
 
 #include "Geometry.hpp"
+#include "../Mesh.hpp"
+#include "../../../Frontends/IPlayGame.hpp"
+
 #include <cstdio>
 #include <cfloat>
 
@@ -16,6 +19,10 @@
 #include <cassert>
 #endif
 
+/**
+ * A partir d'un descripteur de fichier, le parse
+ * comme un fichier .obj et en calcule les extrema
+ */
 void FindExtremafromObj(
         std::FILE * file,
         float * movmin, float * movmax,
@@ -37,11 +44,11 @@ void FindExtremafromObj(
 
     while (std::fgets(buf, sizeof buf, file) != nullptr) {
         
-        if(buf[1] == 'n') {
+        if(buf[1] == 'n') { // a vn on arrete
             break;
         }
         
-        if(buf[0] != 'v') {
+        if(buf[0] != 'v') { // skip ce qui commence pas par v
             continue;
         }
         
@@ -60,7 +67,37 @@ void FindExtremafromObj(
     printf("mmin mmax dmin dmax emin emax %f %f %f %f %f %f\n",
            *movmin, *movmax, *depthmin, *depthmax, *elevmin, *elevmax
            );
+}
 
+/**
+ * Charge un mesh depuis un fichier .obj dans un format utilisable
+ * par Unity (comme Assimp)
+ */
+void LoadMesh(
+        std::FILE * file,
+        Swarmies::Mesh * mesh
+) {
+    char buf[256];
+
+    float mov = 0;
+    float depth = 0;
+    float elev = 0;
+
+    while (std::fgets(buf, sizeof buf, file) != nullptr) {
+
+        if(buf[1] == 'n') { // a vn on arrete
+            break;
+        }
+
+        if(buf[0] != 'v') { // skip ce qui commence pas par v
+            continue;
+        }
+
+        sscanf(buf, "v %f %f %f\n", &mov, &elev, &depth);
+
+        struct VertexWrapper vw {{mov, elev, depth}};
+        mesh->vertices.push_back(vw);
+    }
 }
 
 #ifndef NDEBUG
@@ -93,6 +130,5 @@ void testFindExtremafromObj(const char * path) {
     assert(depthmax - 1 < FLOAT_EPSILON);
     assert(elevmin + -1.0000 < FLOAT_EPSILON);
     assert(elevmax - 2.378370 < FLOAT_EPSILON);
-
 }
 #endif

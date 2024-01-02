@@ -7,12 +7,19 @@
 
 #include <cstdio>
 
+# include "../Mesh.hpp"
+
 void FindExtremafromObj(
     std::FILE * file,
     float * xmin, float * xmax,
     float * ymin, float * ymax,
     float * zmin, float * zmax
 );
+
+void LoadMesh(
+        std::FILE * file,
+        Swarmies::Mesh * mesh
+        );
 
 #ifndef NDEBUG
 void testFindExtremafromObj(const char * path);

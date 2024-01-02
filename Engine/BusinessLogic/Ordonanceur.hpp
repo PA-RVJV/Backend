@@ -17,6 +17,10 @@ concept IsDerivedFromRepository = std::is_base_of<Engine::RepositoryBase, Derive
 
 namespace Engine {
 
+#ifndef NDEBUG
+    void test_ordonnanceur_works();
+#endif
+
     /**
      * La classe qui gere tous les repos, les liens
      * entre eux et la semantique de la mutation desdits
@@ -27,9 +31,6 @@ namespace Engine {
         std::vector<RepositoryBase> repos;
         std::vector<RelationBase> relations;
         std::vector<SemantiqueRelationBase> semantiques;
-
-        template<class TRepository>
-        Engine::TSemantiqueRelation<TRepository> getTagRepo();
 
     public:
         /**
@@ -65,31 +66,20 @@ namespace Engine {
 
         template <typename T1, typename T2>
         inline void addTags(const Engine::LinkPayload<T1, T2> & payload) {
-            if(payload.tags_a) a_tags[payload.a.name] = payload.tags_a;
-            if(payload.tags_b) b_tags[payload.b.name] = payload.tags_b;
+            //if(payload.tags_a) a_tags[payload.a.name] = payload.tags_a;
+            //if(payload.tags_b) b_tags[payload.b.name] = payload.tags_b;
         }
 
         template <typename T1, typename T2>
         inline void removeTags(const Engine::LinkPayload<T1, T2> & payload) {
-            a_tags.erase(payload.a.name);
-            b_tags.erase(payload.b.name);
+            //a_tags.erase(payload.a.name);
+            //b_tags.erase(payload.b.name);
         }
 
     public:
 
 
     };
-
 }
-
-#ifndef NDEBUG
-#include <cassert>
-
-void test_ordonnanceur() {
-    auto ordo = Engine::Ordonnanceur();
-}
-
-
-#endif
 
 #endif //SOLUTIONSWARMIES_ORDONANCEUR_HPP

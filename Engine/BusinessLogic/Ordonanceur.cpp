@@ -4,6 +4,16 @@
 
 #include "Ordonanceur.hpp"
 
-namespace Swarmies {
+namespace Engine {
 
+
+
+#ifndef NDEBUG
+#include <cassert>
+
+    void test_ordonnanceur_works() {
+        auto ordo = Engine::Ordonnanceur();
+    }
+
+#endif
 } // Swarmies

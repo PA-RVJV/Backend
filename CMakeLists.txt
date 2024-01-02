@@ -8,7 +8,8 @@ set(CMAKE_CXX_STANDARD 23)
 # une fois build
 #file(COPY Assets DESTINATION $<TARGET_FILE_DIR:TestsSwarmiesServer>)
 
-add_executable(Swarmies_Server main.cpp
+add_executable(Swarmies_Server
+        main.cpp
         Swarmies/BusinessObjects/Geometry/Geometry.cpp
         Swarmies/BusinessObjects/Geometry/Geometry.hpp
         Engine/BusinessLogic/PlayGame.cpp
@@ -25,11 +26,16 @@ add_executable(Swarmies_Server main.cpp
         Engine/BusinessLogic/TSemantiqueRelation.hpp
         Swarmies/repositories.cpp
         Engine/BusinessLogic/Payload.hpp
+        Engine/BusinessLogic/TRepository.cpp
+        Engine/BusinessLogic/TRelations.cpp
+        Engine/BusinessLogic/TSemantiqueRelation.cpp
 )
 
 add_library(UnityGlue SHARED
         Frontends/Unity3d/UnityGlue.cpp
         Frontends/IPlayGame.hpp
+        Frontends/Unity3d/UnityGlue.hpp
+        Swarmies/BusinessObjects/Geometry/Geometry.cpp
 )
 
 add_executable(TestsSwarmiesServer
@@ -40,12 +46,18 @@ add_executable(TestsSwarmiesServer
         Swarmies/BusinessObjects/Mobile.hpp
         Swarmies/BusinessObjects/Mesh.cpp
         Swarmies/BusinessObjects/Geometry/Geometry.cpp
+        Engine/BusinessLogic/TRepository.cpp
+        Engine/BusinessLogic/TRelations.cpp
+        Engine/BusinessLogic/Ordonanceur.cpp
+        Engine/BusinessLogic/Ordonanceur.hpp
+        Engine/BusinessLogic/TSemantiqueRelation.cpp
 )
 
 add_custom_command(TARGET TestsSwarmiesServer POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
         "${CMAKE_CURRENT_SOURCE_DIR}/Swarmies/Assets"
-        $<TARGET_FILE_DIR:TestsSwarmiesServer>/Assets)
+        $<TARGET_FILE_DIR:TestsSwarmiesServer>/Assets
+)
 
 #get_target_property(otp TestsSwarmiesServer RUNTIME_OUTPUT_DIRECTORY_DEBUG)
 set(otp "")
@@ -71,6 +83,13 @@ target_link_libraries(Swarmies_Server UnityGlue)
 add_custom_command(TARGET UnityGlue POST_BUILD COMMAND
         ${CMAKE_COMMAND} -E copy_if_different
         $<TARGET_FILE:UnityGlue> "${UNITY_PROJECT_FOLDER}/Assets/Plugins"
+        COMMENT "Copying DLL file to output directory..."
+)
+
+add_custom_command(TARGET UnityGlue POST_BUILD COMMAND
+        ${CMAKE_COMMAND} -E copy_directory_if_different
+        "${CMAKE_CURRENT_SOURCE_DIR}/Swarmies/Assets"
+        "${UNITY_PROJECT_FOLDER}/Assets/Plugins"
         COMMENT "Copying DLL file to output directory..."
 )
 
