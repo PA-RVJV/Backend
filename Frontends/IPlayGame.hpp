@@ -13,8 +13,9 @@ struct VertexWrapper { // this is just so you
 };
 
 class IPlayGame {
-    virtual void LoadMesh(const char* name, struct VertexWrapper *vw) = 0;
+    virtual struct VertexWrapper LoadMesh(const char* name) = 0;
     virtual void LoadLevel(const char* name) = 0;
+    virtual int MeshVertexCount(const char* name) = 0;
 };
 
 #endif //SWARMIES_IPLAYGAME_HPP

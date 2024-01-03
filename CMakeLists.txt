@@ -36,6 +36,7 @@ add_library(UnityGlue SHARED
         Frontends/IPlayGame.hpp
         Frontends/Unity3d/UnityGlue.hpp
         Swarmies/BusinessObjects/Geometry/Geometry.cpp
+        Swarmies/BusinessObjects/Mesh.cpp
 )
 
 add_executable(TestsSwarmiesServer
@@ -89,8 +90,8 @@ add_custom_command(TARGET UnityGlue POST_BUILD COMMAND
 add_custom_command(TARGET UnityGlue POST_BUILD COMMAND
         ${CMAKE_COMMAND} -E copy_directory_if_different
         "${CMAKE_CURRENT_SOURCE_DIR}/Swarmies/Assets"
-        "${UNITY_PROJECT_FOLDER}/Assets/Plugins"
-        COMMENT "Copying DLL file to output directory..."
+        "${UNITY_PROJECT_FOLDER}/Assets/GameAssets"
+        COMMENT "Copying Game Assets to output directory..."
 )
 
 # Arbo plus lisible sous XCode

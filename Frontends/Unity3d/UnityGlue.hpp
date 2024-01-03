@@ -11,7 +11,8 @@
 class UnityPlayGame: IPlayGame {
 public:
     void LoadLevel(const char* name) final;
-    void LoadMesh(const char* name, struct VertexWrapper *vw) final;
+    struct VertexWrapper LoadMesh(const char* name) final;
+    int MeshVertexCount(const char* name) final;
 };
 
 

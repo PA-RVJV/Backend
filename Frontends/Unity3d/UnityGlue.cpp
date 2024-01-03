@@ -10,6 +10,7 @@
 #endif
 
 #include <cstdio>
+#include <filesystem>
 #include "IUnityInterface.h"
 #include "IUnityGraphics.h"
 #include "IUnityLog.h"
@@ -18,18 +19,40 @@
 
 #include "../../Swarmies/BusinessObjects/Geometry/Geometry.hpp"
 
+IUnityLog* unityLog = nullptr;
+
 void UnityPlayGame::LoadLevel(const char* name) {
 
 }
 
-void UnityPlayGame::LoadMesh(const char* name, struct VertexWrapper * vw) {
-    std::FILE * file = std::fopen(name, "rb");
+
+struct VertexWrapper UnityPlayGame::LoadMesh(const char* name) {
+
+    std::string path = ".";
+    for (const auto & entry : std::filesystem::directory_iterator(path)) {
+        UNITY_LOG(unityLog, entry.path().c_str());
+    }
+    using namespace std::string_literals;
+
+    std::FILE * file = std::fopen(("Assets/GameAssets/"s + name + ".obj").c_str(), "rb");
     Swarmies::Mesh mesh;
+
     ::LoadMesh(file, &mesh);
-    *vw = *mesh.vertices.data();
+
+    return *mesh.vertices.data();
 }
 
-IUnityLog* unityLog = nullptr;
+
+int UnityPlayGame::MeshVertexCount(const char* name) {
+    using namespace std::string_literals;
+
+    std::FILE * file = std::fopen(("Assets/GameAssets/"s + name + ".obj").c_str(), "rb");
+    Swarmies::Mesh mesh;
+
+    ::LoadMesh(file, &mesh);
+
+    return mesh.number_vertices();
+}
 
 // Unity plugin load event
 extern "C" void UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API
@@ -58,18 +81,17 @@ extern "C" UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API float SayHello() {
 extern "C" UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API void LoadLevelMesh(const char * name, struct VertexWrapper * vw) {
     UNITY_LOG(unityLog, name);
 
-    UnityPlayGame().LoadMesh(name, vw);
+    UnityPlayGame().LoadMesh(name);
     //return 24.f;
-
 }
 
 extern "C" UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API int MeshVerticesNumber(const char * name) {
     UNITY_LOG(unityLog, name);
 
-    Swarmies::Mesh mesh;
-
-    UnityPlayGame().LoadMesh(name, mesh.vertices.data());
+    int ct = (UnityPlayGame().MeshVertexCount(name));
     //return 24.f;
+
+    return ct;
 }
 
 struct MyCustomEvent {};

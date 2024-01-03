@@ -16,10 +16,8 @@ void FindExtremafromObj(
     float * zmin, float * zmax
 );
 
-void LoadMesh(
-        std::FILE * file,
-        Swarmies::Mesh * mesh
-        );
+
+void LoadMesh(std::FILE * file, Swarmies::Mesh * mesh);
 
 #ifndef NDEBUG
 void testFindExtremafromObj(const char * path);
