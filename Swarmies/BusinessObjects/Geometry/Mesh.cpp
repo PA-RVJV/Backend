@@ -10,7 +10,7 @@ namespace Swarmies {
 //    Mesh::~Mesh() {
 //        std::cout << "Mesh destroyed " << name << '\n';
 //    }
-    //Mesh::Mesh() noexcept: vertices({}) {}
+    Mesh::Mesh(std::string && name) noexcept: name(name) {}
 
     int Mesh::number_vertices() const {return static_cast<int>(vertices.size()); }
 }

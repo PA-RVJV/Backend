@@ -21,8 +21,7 @@ namespace Swarmies {
         const std::string name;
         std::vector<struct VertexWrapper> vertices;
 
-        //~Mesh();
-        //Mesh() noexcept;
+        Mesh(std::string && name) noexcept;
         [[nodiscard]] int number_vertices() const;
     };
 }

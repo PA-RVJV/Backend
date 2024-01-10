@@ -34,7 +34,7 @@ Swarmies::Mesh UnityPlayGame::LoadMesh(const char* name) {
     using namespace std::string_literals;
 
     std::FILE * file = std::fopen(("Assets/GameAssets/"s + name + ".obj").c_str(), "rb");
-    Swarmies::Mesh mesh;
+    Swarmies::Mesh mesh(name);
 
     ::LoadMesh(file, &mesh);
 
@@ -46,7 +46,7 @@ int UnityPlayGame::MeshVertexCount(const char* name) {
     using namespace std::string_literals;
 
     std::FILE * file = std::fopen(("Assets/GameAssets/"s + name + ".obj").c_str(), "rb");
-    Swarmies::Mesh mesh;
+    Swarmies::Mesh mesh(name);
 
     ::LoadMesh(file, &mesh);
 
@@ -81,11 +81,11 @@ extern "C" UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API void LoadLevelMesh(const c
     UNITY_LOG(unityLog, name);
 
     Swarmies::Mesh mesh = UnityPlayGame().LoadMesh(name);
-//    for (int i = 0; i < vw_.size; ++i) {
-//        vw[i*3+0] = vw_.vtx[i][0];
-//        vw[i*3+1] = vw_.vtx[i][1];
-//        vw[i*3+2] = vw_.vtx[i][2];
-//    }
+    for (int i = 0; i < mesh.number_vertices(); ++i) {
+        vw[i*3+0] = mesh.vertices.data()->abscisse;
+        vw[i*3+1] = mesh.vertices.data()->ordonnee;
+        vw[i*3+2] = mesh.vertices.data()->prof;
+    }
     //return 24.f;
 }
 
