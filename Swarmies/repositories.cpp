@@ -2,8 +2,8 @@
 // Created by ivo on 28/12/2023.
 //
 
-#include "../Engine/BusinessLogic/TRepository.hpp"
-#include "BusinessObjects/Mesh.hpp"
+#include "../Engine/Relations/TRepository.hpp"
+#include "BusinessObjects/Geometry/Mesh.hpp"
 #include "BusinessObjects/Mobile.hpp"
 
 namespace Swarmies {

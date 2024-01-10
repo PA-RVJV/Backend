@@ -9,11 +9,12 @@
 //
 
 #include "Geometry.hpp"
-#include "../Mesh.hpp"
-#include "../../../Frontends/IPlayGame.hpp"
+#include "Mesh.hpp"
+#include "../../Frontends/IPlayGame.hpp"
 
 #include <cstdio>
 #include <cfloat>
+#include <vector>
 
 #ifndef NDEBUG
 #include <cassert>
@@ -71,7 +72,7 @@ void FindExtremafromObj(
 
 /**
  * Charge un mesh depuis un fichier .obj dans un format utilisable
- * par Unity (comme Assimp)
+ * par Unity (meme principe que Assimp)
  */
 void LoadMesh(
         std::FILE * file,
@@ -95,7 +96,7 @@ void LoadMesh(
 
         sscanf(buf, "v %f %f %f\n", &mov, &elev, &depth);
 
-        struct VertexWrapper vw {{mov, elev, depth}};
+        struct VertexWrapper vw {mov, elev, depth};
         mesh->vertices.push_back(vw);
     }
 }

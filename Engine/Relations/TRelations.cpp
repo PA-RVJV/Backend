@@ -9,7 +9,7 @@
 #include <iostream>
 
 #include "TRelations.hpp"
-#include "../../Swarmies/BusinessObjects/Mesh.hpp"
+#include "../../Swarmies/BusinessObjects/Geometry/Mesh.hpp"
 #include "../../Swarmies/BusinessObjects/Mobile.hpp"
 
 template<> void Engine::TRelation<Swarmies::Mesh, Swarmies::Mobile>::testRelations() {

@@ -12,46 +12,47 @@ add_executable(Swarmies_Server
         main.cpp
         Swarmies/BusinessObjects/Geometry/Geometry.cpp
         Swarmies/BusinessObjects/Geometry/Geometry.hpp
-        Engine/BusinessLogic/PlayGame.cpp
-        Engine/BusinessLogic/PlayGame.hpp
-        Frontends/IPlayGame.hpp
+        Engine/Relations/PlayGame.cpp
+        Engine/Relations/PlayGame.hpp
         Swarmies/BusinessObjects/GameLevel.hpp
         Swarmies/BusinessObjects/Mobile.hpp
-        Swarmies/BusinessObjects/Mesh.hpp
-        Swarmies/BusinessObjects/Mesh.cpp
-        Engine/BusinessLogic/TRepository.hpp
-        Engine/BusinessLogic/TRelations.hpp
-        Engine/BusinessLogic/Ordonanceur.cpp
-        Engine/BusinessLogic/Ordonanceur.hpp
-        Engine/BusinessLogic/TSemantiqueRelation.hpp
+        Swarmies/BusinessObjects/Geometry/Mesh.hpp
+        Swarmies/BusinessObjects/Geometry/Mesh.cpp
+        Engine/Relations/TRepository.hpp
+        Engine/Relations/TRelations.hpp
+        Engine/Relations/Ordonanceur.cpp
+        Engine/Relations/Ordonanceur.hpp
+        Engine/Relations/TSemantiqueRelation.hpp
         Swarmies/repositories.cpp
-        Engine/BusinessLogic/Payload.hpp
-        Engine/BusinessLogic/TRepository.cpp
-        Engine/BusinessLogic/TRelations.cpp
-        Engine/BusinessLogic/TSemantiqueRelation.cpp
+        Engine/Relations/Payload.hpp
+        Engine/Relations/TRepository.cpp
+        Engine/Relations/TRelations.cpp
+        Engine/Relations/TSemantiqueRelation.cpp
 )
 
 add_library(UnityGlue SHARED
-        Frontends/Unity3d/UnityGlue.cpp
-        Frontends/IPlayGame.hpp
-        Frontends/Unity3d/UnityGlue.hpp
+        Swarmies/Frontends/Unity3d/UnityGlue.cpp
+        Swarmies/Frontends/IPlayGame.hpp
+        Swarmies/Frontends/Unity3d/UnityGlue.hpp
         Swarmies/BusinessObjects/Geometry/Geometry.cpp
-        Swarmies/BusinessObjects/Mesh.cpp
+        Swarmies/BusinessObjects/Geometry/Geometry.hpp
+        Swarmies/BusinessObjects/Geometry/Mesh.cpp
+        Swarmies/BusinessObjects/Geometry/Mesh.hpp
 )
 
 add_executable(TestsSwarmiesServer
         tests.cpp
-        Engine/BusinessLogic/TRepository.hpp
-        Engine/BusinessLogic/TRelations.hpp
-        Swarmies/BusinessObjects/Mesh.hpp
+        Engine/Relations/TRepository.hpp
+        Engine/Relations/TRelations.hpp
+        Swarmies/BusinessObjects/Geometry/Mesh.hpp
         Swarmies/BusinessObjects/Mobile.hpp
-        Swarmies/BusinessObjects/Mesh.cpp
+        Swarmies/BusinessObjects/Geometry/Mesh.cpp
         Swarmies/BusinessObjects/Geometry/Geometry.cpp
-        Engine/BusinessLogic/TRepository.cpp
-        Engine/BusinessLogic/TRelations.cpp
-        Engine/BusinessLogic/Ordonanceur.cpp
-        Engine/BusinessLogic/Ordonanceur.hpp
-        Engine/BusinessLogic/TSemantiqueRelation.cpp
+        Engine/Relations/TRepository.cpp
+        Engine/Relations/TRelations.cpp
+        Engine/Relations/Ordonanceur.cpp
+        Engine/Relations/Ordonanceur.hpp
+        Engine/Relations/TSemantiqueRelation.cpp
 )
 
 add_custom_command(TARGET TestsSwarmiesServer POST_BUILD
@@ -99,5 +100,5 @@ source_group("Engine/Source Files" REGULAR_EXPRESSION "Backend/Engine/.+cpp")
 source_group("Engine/Header Files" REGULAR_EXPRESSION "Backend/Engine/.+hpp")
 source_group("Swarmies/Source Files" REGULAR_EXPRESSION "Backend/Swarmies/.+cpp")
 source_group("Swarmies/Header Files" REGULAR_EXPRESSION "Backend/Swarmies/.+hpp")
-source_group("Frontends/Source Files" REGULAR_EXPRESSION "Backend/Frontends/.+cpp")
-source_group("Frontends/Header Files" REGULAR_EXPRESSION "Backend/Frontends/.+hpp")
+source_group("Swarmies/Frontends/Source Files" REGULAR_EXPRESSION "Backend/Frontends/.+cpp")
+source_group("Swarmies/Frontends/Header Files" REGULAR_EXPRESSION "Backend/Frontends/.+hpp")

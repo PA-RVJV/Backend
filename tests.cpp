@@ -9,7 +9,7 @@
 #include "Engine/BusinessLogic/TSemantiqueRelation.hpp"
 #include "Engine/BusinessLogic/Ordonanceur.hpp"
 
-#include "Swarmies/BusinessObjects/Mesh.hpp"
+#include "Swarmies/BusinessObjects/Geometry/Mesh.hpp"
 #include "Swarmies/BusinessObjects/Geometry/Geometry.hpp"
 #include "Swarmies/BusinessObjects/Mobile.hpp"
 

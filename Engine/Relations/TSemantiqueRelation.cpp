@@ -8,7 +8,7 @@
 #include <cassert>
 
 #include "TSemantiqueRelation.hpp"
-#include "../../Swarmies/BusinessObjects/Mesh.hpp"
+#include "../../Swarmies/BusinessObjects/Geometry/Mesh.hpp"
 
 template<> void Engine::TSemantiqueRelation<Swarmies::Mesh, Engine::SemantiqueRelation::Kind::NO_TAG>::testSemantique() {
 

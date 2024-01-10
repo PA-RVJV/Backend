@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include "Engine/BusinessLogic/TRepository.hpp"
-#include "Engine/BusinessLogic/TRelations.hpp"
-#include "Swarmies/BusinessObjects/Mesh.hpp"
+#include "Engine/Relations/TRepository.hpp"
+#include "Engine/Relations/TRelations.hpp"
+#include "Swarmies/BusinessObjects/Geometry/Mesh.hpp"
 #include "Swarmies/BusinessObjects/Mobile.hpp"
 
 int main() {

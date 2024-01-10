@@ -7,7 +7,7 @@
 
 #include <cstdio>
 
-# include "../Mesh.hpp"
+# include "Mesh.hpp"
 
 void FindExtremafromObj(
     std::FILE * file,

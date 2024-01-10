@@ -17,7 +17,7 @@
 #include "IUnityEventQueue.h"
 #include "UnityGlue.hpp"
 
-#include "../../Swarmies/BusinessObjects/Geometry/Geometry.hpp"
+#include "../../BusinessObjects/Geometry/Geometry.hpp"
 
 IUnityLog* unityLog = nullptr;
 
@@ -25,8 +25,7 @@ void UnityPlayGame::LoadLevel(const char* name) {
 
 }
 
-
-struct VertexWrapper UnityPlayGame::LoadMesh(const char* name) {
+Swarmies::Mesh UnityPlayGame::LoadMesh(const char* name) {
 
     std::string path = ".";
     for (const auto & entry : std::filesystem::directory_iterator(path)) {
@@ -39,7 +38,7 @@ struct VertexWrapper UnityPlayGame::LoadMesh(const char* name) {
 
     ::LoadMesh(file, &mesh);
 
-    return *mesh.vertices.data();
+    return mesh;
 }
 
 
@@ -78,10 +77,15 @@ extern "C" UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API float SayHello() {
     return 24.f;
 }
 
-extern "C" UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API void LoadLevelMesh(const char * name, struct VertexWrapper * vw) {
+extern "C" UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API void LoadLevelMesh(const char * name, float vw[]) {
     UNITY_LOG(unityLog, name);
 
-    UnityPlayGame().LoadMesh(name);
+    Swarmies::Mesh mesh = UnityPlayGame().LoadMesh(name);
+//    for (int i = 0; i < vw_.size; ++i) {
+//        vw[i*3+0] = vw_.vtx[i][0];
+//        vw[i*3+1] = vw_.vtx[i][1];
+//        vw[i*3+2] = vw_.vtx[i][2];
+//    }
     //return 24.f;
 }
 

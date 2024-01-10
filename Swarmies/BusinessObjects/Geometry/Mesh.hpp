@@ -8,8 +8,13 @@
 #include <string>
 #include <vector>
 #include <array>
-#include "../../../Backend/Frontends/IPlayGame.hpp"
 
+struct VertexWrapper  {
+    float abscisse;
+    float ordonnee;
+    float prof;
+
+};
 
 namespace Swarmies {
     struct Mesh {
