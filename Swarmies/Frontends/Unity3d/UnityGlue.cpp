@@ -11,6 +11,7 @@
 
 #include <cstdio>
 #include <filesystem>
+#include <iostream>
 #include "IUnityInterface.h"
 #include "IUnityGraphics.h"
 #include "IUnityLog.h"
@@ -77,15 +78,17 @@ extern "C" UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API float SayHello() {
     return 24.f;
 }
 
-extern "C" UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API void LoadLevelMesh(const char * name, float vw[]) {
+extern "C" UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API void LoadLevelMesh(const char * name, int num_vertices, float vw[]) {
     UNITY_LOG(unityLog, name);
 
     Swarmies::Mesh mesh = UnityPlayGame().LoadMesh(name);
     for (int i = 0; i < mesh.number_vertices(); ++i) {
-        vw[i*3+0] = mesh.vertices.data()->abscisse;
-        vw[i*3+1] = mesh.vertices.data()->ordonnee;
-        vw[i*3+2] = mesh.vertices.data()->prof;
+        vw[i*3+0] = mesh.vertices.at(i).abscisse;
+        vw[i*3+1] = mesh.vertices.at(i).ordonnee;
+        vw[i*3+2] = mesh.vertices.at(i).prof;
     }
+
+    std::cout << "toto" << std::endl;
     //return 24.f;
 }
 
