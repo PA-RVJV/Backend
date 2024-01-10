@@ -41,32 +41,7 @@ add_library(UnityGlue SHARED
         Swarmies/BusinessObjects/Geometry/Mesh.cpp
         Swarmies/BusinessObjects/Geometry/Mesh.hpp
 )
-endif ()
 
-add_executable(TestsSwarmiesServer
-        tests.cpp
-        Engine/Relations/TRepository.hpp
-        Engine/Relations/TRelations.hpp
-        Swarmies/BusinessObjects/Geometry/Mesh.hpp
-        Swarmies/BusinessObjects/Mobile.hpp
-        Swarmies/BusinessObjects/Geometry/Mesh.cpp
-        Swarmies/BusinessObjects/Geometry/Geometry.cpp
-        Engine/Relations/TRepository.cpp
-        Engine/Relations/TRelations.cpp
-        Engine/Relations/Ordonanceur.cpp
-        Engine/Relations/Ordonanceur.hpp
-        Engine/Relations/TSemantiqueRelation.cpp
-)
-
-add_custom_command(TARGET TestsSwarmiesServer POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
-        "${CMAKE_CURRENT_SOURCE_DIR}/Swarmies/Assets"
-        $<TARGET_FILE_DIR:TestsSwarmiesServer>/Assets
-)
-
-#get_target_property(otp TestsSwarmiesServer RUNTIME_OUTPUT_DIRECTORY_DEBUG)
-set(otp "")
-message(STATUS "Output dir ${otp}")
 
 set(UNITY_VERSION "2022.3.13f1" CACHE STRING "The folder name of the unity editor you use")
 set(UNITY_PROJECT_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/../UnityFront" CACHE STRING "The folder where the plugin should be copied to")
@@ -96,6 +71,29 @@ add_custom_command(TARGET UnityGlue POST_BUILD COMMAND
         "${CMAKE_CURRENT_SOURCE_DIR}/Swarmies/Assets"
         "${UNITY_PROJECT_FOLDER}/Assets/GameAssets"
         COMMENT "Copying Game Assets to output directory..."
+)
+
+endif ()
+
+add_executable(TestsSwarmiesServer
+        tests.cpp
+        Engine/Relations/TRepository.hpp
+        Engine/Relations/TRelations.hpp
+        Swarmies/BusinessObjects/Geometry/Mesh.hpp
+        Swarmies/BusinessObjects/Mobile.hpp
+        Swarmies/BusinessObjects/Geometry/Mesh.cpp
+        Swarmies/BusinessObjects/Geometry/Geometry.cpp
+        Engine/Relations/TRepository.cpp
+        Engine/Relations/TRelations.cpp
+        Engine/Relations/Ordonanceur.cpp
+        Engine/Relations/Ordonanceur.hpp
+        Engine/Relations/TSemantiqueRelation.cpp
+)
+
+add_custom_command(TARGET TestsSwarmiesServer POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
+        "${CMAKE_CURRENT_SOURCE_DIR}/Swarmies/Assets"
+        $<TARGET_FILE_DIR:TestsSwarmiesServer>/Assets
 )
 
 # Arbo plus lisible sous XCode
