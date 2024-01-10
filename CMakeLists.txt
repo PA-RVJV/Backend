@@ -30,6 +30,8 @@ add_executable(Swarmies_Server
         Engine/Relations/TSemantiqueRelation.cpp
 )
 
+option(ADD_UNITY_GLUE "Build the unity layer ?")
+if(ADD_UNITY_GLUE)
 add_library(UnityGlue SHARED
         Swarmies/Frontends/Unity3d/UnityGlue.cpp
         Swarmies/Frontends/IPlayGame.hpp
@@ -39,6 +41,7 @@ add_library(UnityGlue SHARED
         Swarmies/BusinessObjects/Geometry/Mesh.cpp
         Swarmies/BusinessObjects/Geometry/Mesh.hpp
 )
+endif ()
 
 add_executable(TestsSwarmiesServer
         tests.cpp
