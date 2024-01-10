@@ -4,10 +4,10 @@
 
 #include <cstdio>
 
-#include "Engine/BusinessLogic/TRepository.hpp"
-#include "Engine/BusinessLogic/TRelations.hpp"
-#include "Engine/BusinessLogic/TSemantiqueRelation.hpp"
-#include "Engine/BusinessLogic/Ordonanceur.hpp"
+#include "Engine/Relations/TRepository.hpp"
+#include "Engine/Relations/TRelations.hpp"
+#include "Engine/Relations/TSemantiqueRelation.hpp"
+#include "Engine/Relations/Ordonanceur.hpp"
 
 #include "Swarmies/BusinessObjects/Geometry/Mesh.hpp"
 #include "Swarmies/BusinessObjects/Geometry/Geometry.hpp"
