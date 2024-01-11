@@ -15,10 +15,11 @@
 
 int main(int argc, char * argv[]) {
 
+
+#if SWARMIES_TESTING
     puts("\n*** START TESTING ***");
     printf("Test program name %s\n", argv[0]);
 
-#if SWARMIES_TESTING
     testFindExtremafromObj("Assets/test_topo.obj");
     testRepoWorks();
 
@@ -26,5 +27,7 @@ int main(int argc, char * argv[]) {
     Engine::TSemantiqueRelation<Swarmies::Mesh, Engine::SemantiqueRelation::Kind::NO_TAG>::testSemantique();
     
     Engine::test_ordonnanceur_works();
+#else
+    puts("\n*** Not in testing mode ***");
 #endif
 }
