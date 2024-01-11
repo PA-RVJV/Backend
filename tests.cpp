@@ -18,7 +18,7 @@ int main(int argc, char * argv[]) {
     puts("\n*** START TESTING ***");
     printf("Test program name %s\n", argv[0]);
 
-#ifndef NDEBUG
+#if SWARMIES_TESTING
     testFindExtremafromObj("Assets/test_topo.obj");
     testRepoWorks();
 

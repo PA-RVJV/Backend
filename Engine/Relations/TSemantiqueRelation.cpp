@@ -3,7 +3,7 @@
 //
 
 
-#ifndef NDEBUG
+#if SWARMIES_TESTING
 
 #include <cassert>
 

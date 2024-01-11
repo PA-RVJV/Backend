@@ -8,7 +8,7 @@ namespace Engine {
 
 
 
-#ifndef NDEBUG
+#if SWARMIES_TESTING
 #include <cassert>
 
     void test_ordonnanceur_works() {

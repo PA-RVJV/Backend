@@ -30,7 +30,7 @@ add_executable(Swarmies_Server
         Engine/Relations/TSemantiqueRelation.cpp
 )
 
-option(ADD_UNITY_GLUE "Build the unity layer ?")
+option(ADD_UNITY_GLUE "Build the unity layer ?" OFF)
 if(ADD_UNITY_GLUE)
 add_library(UnityGlue SHARED
         Swarmies/Frontends/Unity3d/UnityGlue.cpp
@@ -75,7 +75,10 @@ add_custom_command(TARGET UnityGlue POST_BUILD COMMAND
 
 endif ()
 
-add_executable(TestsSwarmiesServer
+if(BUILD_TESTING)
+
+set(TEST_EXECUTABLE_NAME "TestsSwarmiesServerexe")
+add_executable(${TEST_EXECUTABLE_NAME}
         tests.cpp
         Engine/Relations/TRepository.hpp
         Engine/Relations/TRelations.hpp
@@ -89,12 +92,14 @@ add_executable(TestsSwarmiesServer
         Engine/Relations/Ordonanceur.hpp
         Engine/Relations/TSemantiqueRelation.cpp
 )
-
-add_custom_command(TARGET TestsSwarmiesServer POST_BUILD
+target_compile_definitions(${TEST_EXECUTABLE_NAME} PRIVATE SWARMIES_TESTING)
+add_custom_command(TARGET "${TEST_EXECUTABLE_NAME}" POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
         "${CMAKE_CURRENT_SOURCE_DIR}/Swarmies/Assets"
-        $<TARGET_FILE_DIR:TestsSwarmiesServer>/Assets
+        $<TARGET_FILE_DIR:${TEST_EXECUTABLE_NAME}>/Assets
 )
+add_test(NAME "TestsSwarmiesServer" COMMAND ${TEST_EXECUTABLE_NAME})
+endif ()
 
 # Arbo plus lisible sous XCode
 source_group("Engine/Source Files" REGULAR_EXPRESSION "Backend/Engine/.+cpp")

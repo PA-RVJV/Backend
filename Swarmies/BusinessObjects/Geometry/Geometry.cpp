@@ -101,7 +101,7 @@ void LoadMesh(
     }
 }
 
-#ifndef NDEBUG
+#if SWARMIES_TESTING
 #include <string>
 void testFindExtremafromObj(const char * path) {
 

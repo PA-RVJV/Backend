@@ -19,7 +19,7 @@ void FindExtremafromObj(
 
 void LoadMesh(std::FILE * file, Swarmies::Mesh * mesh);
 
-#ifndef NDEBUG
+#if SWARMIES_TESTING
 void testFindExtremafromObj(const char * path);
 #endif
 
