@@ -14,10 +14,11 @@
 
 #include <cstdio>
 #include <cfloat>
-#include <vector>
 
-#ifndef NDEBUG
+
+#if SWARMIES_TESTING
 #include <cassert>
+#include <iostream>
 #endif
 
 /**
@@ -70,36 +71,6 @@ void FindExtremafromObj(
            );
 }
 
-/**
- * Charge un mesh depuis un fichier .obj dans un format utilisable
- * par Unity (meme principe que Assimp)
- */
-void LoadMesh(
-        std::FILE * file,
-        Swarmies::Mesh * mesh
-) {
-    char buf[256];
-
-    float mov = 0;
-    float depth = 0;
-    float elev = 0;
-
-    while (std::fgets(buf, sizeof buf, file) != nullptr) {
-
-        if(buf[1] == 'n') { // a vn on arrete
-            break;
-        }
-
-        if(buf[0] != 'v') { // skip ce qui commence pas par v
-            continue;
-        }
-
-        sscanf(buf, "v %f %f %f\n", &mov, &elev, &depth);
-
-        struct VertexWrapper vw {mov, elev, depth};
-        mesh->vertices.push_back(vw);
-    }
-}
 
 #if SWARMIES_TESTING
 #include <string>
@@ -107,7 +78,10 @@ void testFindExtremafromObj(const char * path) {
 
     std::FILE * file = std::fopen(path, "rb");
     
-    if(file == nullptr) assert(0 && (std::string("Can't open ") + path + ".").c_str());
+    if(file == nullptr) {
+        std::cerr << (std::string("Can't open ") + path + ".").c_str();
+        assert(0 && "Can't open asset file");
+    }
 
     float movmin, movmax, depthmin, depthmax, elevmin, elevmax;
 

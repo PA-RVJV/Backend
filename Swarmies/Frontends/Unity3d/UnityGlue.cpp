@@ -18,8 +18,6 @@
 #include "IUnityEventQueue.h"
 #include "UnityGlue.hpp"
 
-#include "../../BusinessObjects/Geometry/Geometry.hpp"
-
 IUnityLog* unityLog = nullptr;
 
 void UnityPlayGame::LoadLevel(const char* name) {
@@ -37,7 +35,7 @@ Swarmies::Mesh UnityPlayGame::LoadMesh(const char* name) {
     std::FILE * file = std::fopen(("Assets/GameAssets/"s + name + ".obj").c_str(), "rb");
     Swarmies::Mesh mesh(name);
 
-    ::LoadMesh(file, &mesh);
+    Swarmies::LoadMesh(file, &mesh);
 
     return mesh;
 }
@@ -49,7 +47,7 @@ int UnityPlayGame::MeshVertexCount(const char* name) {
     std::FILE * file = std::fopen(("Assets/GameAssets/"s + name + ".obj").c_str(), "rb");
     Swarmies::Mesh mesh(name);
 
-    ::LoadMesh(file, &mesh);
+    Swarmies::LoadMesh(file, &mesh);
 
     return mesh.number_vertices();
 }

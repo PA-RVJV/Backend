@@ -3,6 +3,7 @@
 //
 
 #include <cstdio>
+#include <filesystem>
 
 #include "Engine/Relations/TRepository.hpp"
 #include "Engine/Relations/TRelations.hpp"
@@ -19,8 +20,10 @@ int main(int argc, char * argv[]) {
 #if SWARMIES_TESTING
     puts("\n*** START TESTING ***");
     printf("Test program name %s\n", argv[0]);
+    std::filesystem::path path(argv[0]);
+    //printf("Test program name %s\n", ..c_str());
 
-    testFindExtremafromObj("Assets/test_topo.obj");
+    testFindExtremafromObj((path.parent_path().append("./Assets/test_topo.obj")).c_str());
     testRepoWorks();
 
     Engine::TRelation<Swarmies::Mesh, Swarmies::Mobile>::testRelations();

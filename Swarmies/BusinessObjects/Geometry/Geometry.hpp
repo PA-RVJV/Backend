@@ -16,9 +16,6 @@ void FindExtremafromObj(
     float * zmin, float * zmax
 );
 
-
-void LoadMesh(std::FILE * file, Swarmies::Mesh * mesh);
-
 #if SWARMIES_TESTING
 void testFindExtremafromObj(const char * path);
 #endif

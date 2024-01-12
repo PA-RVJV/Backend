@@ -3,10 +3,8 @@ project(Swarmies_backend)
 
 set(CMAKE_CXX_STANDARD 23)
 
-# on veut que nos programmes puissent modifier
-# les fichiers sur lequel on travaille
-# une fois build
-#file(COPY Assets DESTINATION $<TARGET_FILE_DIR:TestsSwarmiesServer>)
+include(CTest)
+enable_testing()
 
 add_executable(Swarmies_Server
         main.cpp
@@ -44,7 +42,7 @@ add_library(UnityGlue SHARED
 
 
 set(UNITY_VERSION "2022.3.13f1" CACHE STRING "The folder name of the unity editor you use")
-set(UNITY_PROJECT_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/../UnityFront" CACHE STRING "The folder where the plugin should be copied to")
+set(UNITY_PROJECT_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/../UnityFront" CACHE PATH "The folder where the plugin should be copied to")
 
 if(UNITY_VERSION EQUAL -1)
     message(FATAL_ERROR "You must specify the unity version you use")
@@ -77,7 +75,7 @@ endif ()
 
 if(BUILD_TESTING)
 
-set(TEST_EXECUTABLE_NAME "TestsSwarmiesServerexe")
+set(TEST_EXECUTABLE_NAME "TestsSwarmiesServer")
 add_executable(${TEST_EXECUTABLE_NAME}
         tests.cpp
         Engine/Relations/TRepository.hpp
@@ -98,7 +96,7 @@ add_custom_command(TARGET "${TEST_EXECUTABLE_NAME}" POST_BUILD
         "${CMAKE_CURRENT_SOURCE_DIR}/Swarmies/Assets"
         $<TARGET_FILE_DIR:${TEST_EXECUTABLE_NAME}>/Assets
 )
-add_test(NAME "TestsSwarmiesServer" COMMAND ${TEST_EXECUTABLE_NAME})
+add_test(NAME ${TEST_EXECUTABLE_NAME} COMMAND ${TEST_EXECUTABLE_NAME})
 endif ()
 
 # Arbo plus lisible sous XCode
