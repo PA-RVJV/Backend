@@ -23,7 +23,7 @@ int main(int argc, char * argv[]) {
     std::filesystem::path path(argv[0]);
     //printf("Test program name %s\n", ..c_str());
 
-    testFindExtremafromObj((path.parent_path().append(std::string( "./Assets/test_topo.obj"))).c_str());
+    testFindExtremafromObj((path.parent_path().append("./Assets/test_topo.obj")).string().c_str());
     testRepoWorks();
 
     Engine::TRelation<Swarmies::Mesh, Swarmies::Mobile>::testRelations();
