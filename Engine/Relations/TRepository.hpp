@@ -8,7 +8,7 @@
 #include <string>
 #include <unordered_map>
 
-#ifndef NDEBUG
+#if SWARMIES_TESTING
 void testRepoWorks();
 #endif
 

@@ -17,7 +17,7 @@ concept IsDerivedFromRepository = std::is_base_of<Engine::RepositoryBase, Derive
 
 namespace Engine {
 
-#ifndef NDEBUG
+#if SWARMIES_TESTING
     void test_ordonnanceur_works();
 #endif
 
