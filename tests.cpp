@@ -20,9 +20,10 @@ int main(int argc, char * argv[]) {
 #if SWARMIES_TESTING
     puts("\n*** START TESTING ***");
     printf("Test program name %s\n", argv[0]);
-    std::filesystem::path path(argv[0]);
-    //printf("Test program name %s\n", ..c_str());
 
+    std::filesystem::path path(argv[0]);
+
+    testMeshLoads((path.parent_path().append("./Assets/test_topo.obj")).string().c_str());
     testFindExtremafromObj((path.parent_path().append("./Assets/test_topo.obj")).string().c_str());
     testRepoWorks();
 

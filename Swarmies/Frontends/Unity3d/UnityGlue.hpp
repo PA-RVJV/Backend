@@ -11,8 +11,11 @@
 class UnityPlayGame: IPlayGame {
 public:
     void LoadLevel(const char* name) final;
-    Swarmies::Mesh LoadMesh(const char* name) final;
+    Swarmies::Mesh& LoadMesh(const char* name) final;
     int MeshVertexCount(const char* name) final;
+    int MeshNormalsCount(const char* name) final;
+    int MeshUVCount(const char* name) final;
+    int MeshTrianglesCount(const char* name) final;
 };
 
 

@@ -9,17 +9,9 @@
 //
 
 #include "Geometry.hpp"
-#include "Mesh.hpp"
-#include "../../Frontends/IPlayGame.hpp"
 
 #include <cstdio>
 #include <cfloat>
-
-
-#if SWARMIES_TESTING
-#include <cassert>
-#include <iostream>
-#endif
 
 /**
  * A partir d'un descripteur de fichier, le parse
@@ -63,17 +55,20 @@ void FindExtremafromObj(
         if(depth < *depthmin) { *depthmin = depth; }
         if(depth > *depthmax) { *depthmax = depth; }
 
-        printf("%f %f %f\n", mov, depth, elev);
+        // printf("%f %f %f\n", mov, depth, elev);
     }
 
-    printf("mmin mmax dmin dmax emin emax %f %f %f %f %f %f\n",
-           *movmin, *movmax, *depthmin, *depthmax, *elevmin, *elevmax
-           );
+//    printf("mmin mmax dmin dmax emin emax %f %f %f %f %f %f\n",
+//           *movmin, *movmax, *depthmin, *depthmax, *elevmin, *elevmax
+//           );
 }
 
 
 #if SWARMIES_TESTING
 #include <string>
+#include <cassert>
+#include <iostream>
+
 void testFindExtremafromObj(const char * path) {
 
     std::FILE * file = std::fopen(path, "rb");
@@ -105,5 +100,7 @@ void testFindExtremafromObj(const char * path) {
     assert(depthmax - 1 < FLOAT_EPSILON);
     assert(elevmin + -1.0000 < FLOAT_EPSILON);
     assert(elevmax - 2.378370 < FLOAT_EPSILON);
+
+    puts("testFindExtremafromObj ok");
 }
 #endif
