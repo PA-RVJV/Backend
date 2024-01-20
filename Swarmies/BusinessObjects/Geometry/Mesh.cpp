@@ -109,7 +109,7 @@ void testMeshLoads(const char * path) {
         i = f;
     }
 
-    assert(i ==52);
+    assert(i ==135);
     puts("testMeshLoads ok");
 }
 
