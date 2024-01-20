@@ -10,29 +10,30 @@ namespace Swarmies {
 //    Mesh::~Mesh() {
 //        std::cout << "Mesh destroyed " << name << '\n';
 //    }
-    Mesh::Mesh(std::string && name) noexcept: name(name), triangles_iterator(faces) {}
+    Mesh::Mesh(std::string && name) noexcept: name(name), triangles_iterator(faces, vertices) {}
 
     int Mesh::vertice_count() const {return static_cast<int>(vertices.size()); }
-    int Mesh::normals_count() const {return static_cast<int>(normals.size()); }
-    int Mesh::texture_count() const {return static_cast<int>(texture.size()); }
+    int Mesh::normals_count() const {return static_cast<int>(vertices.size()); }
+    int Mesh::texture_count() const {return static_cast<int>(uvs.size()); }
     int Mesh::triangles_count() const {return static_cast<int>(std::size(triangles_iterator)); }
 
     Mesh &Mesh::operator=(Mesh && o) noexcept {
         if(this != &o) {
-            vertices = std::move(o.vertices);
+            vertices_pos = std::move(o.vertices_pos);
             normals = std::move(o.normals);
-            texture = std::move(o.texture);
+            uvs = std::move(o.uvs);
             faces = std::move(o.faces);
+            vertices = std::move(o.vertices);
         }
         return *this;
     }
 
     Mesh::Mesh(
             std::string &&name,
-            auto vertices, auto normals, auto triangles,
-            auto faces) noexcept
-        : vertices(std::move(vertices)), normals(std::move(normals))
-        , faces(std::move(faces)), triangles_iterator(this->faces)
+            auto vertices_pos, auto normals, auto uvs,
+            auto faces, auto vertices) noexcept
+        : vertices_pos(std::move(vertices_pos)),normals(std::move(normals)), uvs(std::move(uvs))
+        , faces(std::move(faces)), vertices(std::move(vertices)), triangles_iterator(this->faces, this->vertices)
         {}
 
     /**
@@ -47,7 +48,7 @@ namespace Swarmies {
 
         while (std::fgets(buf, sizeof buf, file) != nullptr) {
 
-            if(buf[0] == 'v') { // skip ce qui commence pas par v
+            if(buf[0] == 'v') {
                 goto vertex;
             }
             else if(buf[0] == 'f') {
@@ -60,7 +61,7 @@ namespace Swarmies {
                 switch (buf[1]) {
                     case ' ':
                         sscanf(buf, "v %f %f %f\n", &vw.abscisse, &vw.ordonnee, &vw.prof);
-                        old.vertices.push_back(vw);
+                        old.vertices_pos.push_back(vw);
                         break;
                     case 'n':
                         sscanf(buf, "vn %f %f %f\n", &vw.abscisse, &vw.ordonnee, &vw.prof);
@@ -68,7 +69,7 @@ namespace Swarmies {
                         break;
                     case 't':
                         sscanf(buf, "vt %f %f\n", &vw.abscisse, &vw.ordonnee);
-                        old.texture.push_back(vw);
+                        old.uvs.push_back(vw);
                         break;
                 }
             }
@@ -78,11 +79,14 @@ namespace Swarmies {
                 sscanf(buf, "f %d/%d/%d %d/%d/%d %d/%d/%d",
                        &a[0][0], &a[0][1], &a[0][2], &a[1][0], &a[1][1], &a[1][2], &a[2][0], &a[2][1], &a[2][2]);
                 old.faces.push_back(a);
+                for (int i = 0; i < 3; ++i) {
+                    old.vertices[vert_hash(a[i][0], a[i][2])] = Vertex{a[i][0], a[i][2]};
+                }
             };
             continue;
         }
 
-        return {old.name.c_str(), old.vertices, old.normals, old.texture, old.faces};
+        return {old.name.c_str(), old.vertices_pos, old.normals, old.uvs, old.faces, old.vertices};
     }
 }
 

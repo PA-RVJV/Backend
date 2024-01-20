@@ -38,10 +38,10 @@ static Swarmies::Mesh& load_mesh(const char* name) {
 }
 
 Swarmies::Mesh& UnityPlayGame::LoadMesh(const char* name) {
-    std::string path = ".";
-    for (const auto & entry : std::filesystem::directory_iterator(path)) {
-        UNITY_LOG(unityLog, entry.path().c_str());
-    }
+//    std::string path = ".";
+//    for (const auto & entry : std::filesystem::directory_iterator(path)) {
+//        UNITY_LOG(unityLog, entry.path().c_str());
+//    }
 
     return load_mesh(name);
 }
@@ -96,24 +96,36 @@ void LoadLevelMesh(const char * name, float vertices[], float norms[], float uvs
     UNITY_LOG(unityLog, name);
 
     Swarmies::Mesh & mesh = UnityPlayGame().LoadMesh(name);
-    for (int i = 0; i < mesh.vertice_count(); ++i) {
-        vertices[i*3+0] = mesh.vertices.at(i).abscisse;
-        vertices[i*3+1] = mesh.vertices.at(i).ordonnee;
-        vertices[i*3+2] = mesh.vertices.at(i).prof;
+
+    int j = 0;
+    for (auto & pair: mesh.vertices) {
+        vertices[j*3+0] = mesh.vertices_pos.at(pair.second.coordinates_ref - 1).abscisse;
+        vertices[j*3+1] = mesh.vertices_pos.at(pair.second.coordinates_ref - 1).ordonnee;
+        vertices[j*3+2] = mesh.vertices_pos.at(pair.second.coordinates_ref - 1).prof;
+        norms[j*3+0] = mesh.normals.at(pair.second.normal_ref - 1).abscisse;
+        norms[j*3+1] = mesh.normals.at(pair.second.normal_ref - 1).ordonnee;
+        norms[j*3+2] = mesh.normals.at(pair.second.normal_ref - 1).prof;
+        j++;
     }
-    for (int i = 0; i < mesh.normals_count(); ++i) {
-        norms[i*3+0] = mesh.normals.at(i).abscisse;
-        norms[i*3+1] = mesh.normals.at(i).ordonnee;
-        norms[i*3+2] = mesh.normals.at(i).prof;
-    }
+//    for (int i = 0; i < mesh.vertice_count(); ++i) {
+//        vertices[i*3+0] = mesh.vertices_pos.at(mesh.vertices.at(i).coordinates_ref - 1).abscisse;
+//        vertices[i*3+1] = mesh.vertices_pos.at(mesh.vertices.at(i).coordinates_ref - 1).ordonnee;
+//        vertices[i*3+2] = mesh.vertices_pos.at(mesh.vertices.at(i).coordinates_ref - 1).prof;
+//    }
+//    for (int i = 0; i < mesh.normals_count(); ++i) {
+//        norms[i*3+0] = mesh.normals.at(mesh.vertices.at(i).normal_ref - 1).abscisse;
+//        norms[i*3+1] = mesh.normals.at(mesh.vertices.at(i).normal_ref - 1).ordonnee;
+//        norms[i*3+2] = mesh.normals.at(mesh.vertices.at(i).normal_ref - 1).prof;
+//    }
     for (int i = 0; i < mesh.texture_count(); ++i) {
-        uvs[i*2+0] = mesh.texture.at(i).abscisse;
-        uvs[i*2+1] = mesh.texture.at(i).ordonnee;
+        uvs[i*2+0] = mesh.uvs.at(i).abscisse;
+        uvs[i*2+1] = mesh.uvs.at(i).ordonnee;
     }
 
     int i = 0;
     for (auto tri: mesh.triangles_iterator) {
-        tris[i++] = tri - 1;
+
+        tris[i++] = tri;
         // dans unity, les face doivent referencer des vertices en partant de zero,
         // dans le format.obj ca part de 1
     }
