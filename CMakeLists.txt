@@ -32,9 +32,9 @@ add_library(SwarmLib STATIC
         Engine/3d/AutodeskObjLoader.cpp
 )
 
+option(LUA_ENABLE_TESTING "" OFF)
 add_subdirectory(ThirdParty/Lua)
 SET(LUA_ENABLE_TESTING OFF CACHE BOOL "Do not test lua" FORCE)
-
 target_link_libraries(SwarmLib PUBLIC lua_static)
 
 target_link_libraries(Swarmies_Server PUBLIC SwarmLib)
