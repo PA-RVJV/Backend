@@ -86,8 +86,6 @@ if(BUILD_TESTING)
             tests.cpp
     )
     target_link_libraries(${TEST_EXECUTABLE_NAME} PUBLIC SwarmLib)
-    target_compile_definitions(${TEST_EXECUTABLE_NAME} PRIVATE SWARMIES_TESTING)
-    target_compile_definitions(${TEST_EXECUTABLE_NAME} PRIVATE SWARMIES_TESTING)
     add_custom_command(TARGET "${TEST_EXECUTABLE_NAME}" POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
             "${CMAKE_CURRENT_SOURCE_DIR}/Swarmies/Assets"
