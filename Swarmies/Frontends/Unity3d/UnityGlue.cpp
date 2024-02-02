@@ -10,12 +10,13 @@
 #endif
 
 #include <cstdio>
-#include <filesystem>
 #include <iostream>
+
 #include "IUnityInterface.h"
 #include "IUnityGraphics.h"
 #include "IUnityLog.h"
 #include "IUnityEventQueue.h"
+
 #include "UnityGlue.hpp"
 
 static IUnityLog* unityLog = nullptr;
@@ -107,16 +108,6 @@ void LoadLevelMesh(const char * name, float vertices[], float norms[], float uvs
         norms[j*3+2] = mesh.normals.at(pair.second.normal_ref - 1).prof;
         j++;
     }
-//    for (int i = 0; i < mesh.vertice_count(); ++i) {
-//        vertices[i*3+0] = mesh.vertices_pos.at(mesh.vertices.at(i).coordinates_ref - 1).abscisse;
-//        vertices[i*3+1] = mesh.vertices_pos.at(mesh.vertices.at(i).coordinates_ref - 1).ordonnee;
-//        vertices[i*3+2] = mesh.vertices_pos.at(mesh.vertices.at(i).coordinates_ref - 1).prof;
-//    }
-//    for (int i = 0; i < mesh.normals_count(); ++i) {
-//        norms[i*3+0] = mesh.normals.at(mesh.vertices.at(i).normal_ref - 1).abscisse;
-//        norms[i*3+1] = mesh.normals.at(mesh.vertices.at(i).normal_ref - 1).ordonnee;
-//        norms[i*3+2] = mesh.normals.at(mesh.vertices.at(i).normal_ref - 1).prof;
-//    }
     for (int i = 0; i < mesh.texture_count(); ++i) {
         uvs[i*2+0] = mesh.uvs.at(i).abscisse;
         uvs[i*2+1] = mesh.uvs.at(i).ordonnee;

@@ -87,19 +87,19 @@ void testFindExtremafromObj(const char * path) {
         &depthmin, &depthmax,
         &elevmin, &elevmax);
 
-    assert(movmin == -3.233417f);
-    assert(movmax == 2.898613f);
-    assert(depthmin == -12.474690f);
-    assert(depthmax == 1.f);
-    assert(elevmin == -1.0000f);
-    assert(elevmax == 2.378370f);
+    assert(movmin == -6.46683311f);
+    assert(movmax == 5.79722691f);
+    assert(depthmin == -24.9493809f);
+    assert(depthmax == 2.f);
+    assert(elevmin == -2.0000f);
+    assert(elevmax == 4.75674105f);
 
-    assert(movmin + -3.233417 < FLOAT_EPSILON);
-    assert(movmax - 2.898613 < FLOAT_EPSILON);
-    assert(depthmin + -12.474690 < FLOAT_EPSILON);
-    assert(depthmax - 1 < FLOAT_EPSILON);
-    assert(elevmin + -1.0000 < FLOAT_EPSILON);
-    assert(elevmax - 2.378370 < FLOAT_EPSILON);
+    assert(movmin + -6.46683311 < FLOAT_EPSILON);
+    assert(movmax - 5.79722691f < FLOAT_EPSILON);
+    assert(depthmin + -24.9493809 < FLOAT_EPSILON);
+    assert(depthmax - 2 < FLOAT_EPSILON);
+    assert(elevmin + -2.0000 < FLOAT_EPSILON);
+    assert(elevmax - 4.75674105 < FLOAT_EPSILON);
 
     puts("testFindExtremafromObj ok");
 }

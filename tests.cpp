@@ -13,6 +13,7 @@
 #include "Swarmies/BusinessObjects/Geometry/Mesh.hpp"
 #include "Swarmies/BusinessObjects/Geometry/Geometry.hpp"
 #include "Swarmies/BusinessObjects/Mobile.hpp"
+#include "Engine/3d/AutodeskObjLoader.hpp"
 
 int main(int argc, char * argv[]) {
 
@@ -31,6 +32,8 @@ int main(int argc, char * argv[]) {
     Engine::TSemantiqueRelation<Swarmies::Mesh, Engine::SemantiqueRelation::Kind::NO_TAG>::testSemantique();
     
     Engine::test_ordonnanceur_works();
+
+    testMultiMesh();
 #else
     puts("\n*** Not in testing mode ***");
 #endif

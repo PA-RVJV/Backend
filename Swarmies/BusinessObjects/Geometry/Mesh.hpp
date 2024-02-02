@@ -53,7 +53,8 @@ namespace Swarmies {
 
 
         explicit Mesh(std::string && name) noexcept;
-        //Mesh(std::string && name, typeof(vertices) vertices, typeof(normals) normals, typeof(triangles) triangles) noexcept;
+        explicit Mesh(Mesh && other) noexcept;
+        explicit Mesh(const std::string & name) = delete;
         Mesh& operator = (Mesh &&) noexcept;
 
         [[nodiscard]] int vertice_count() const;

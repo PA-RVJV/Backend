@@ -26,6 +26,8 @@ add_executable(Swarmies_Server
         Engine/Relations/TRepository.cpp
         Engine/Relations/TRelations.cpp
         Engine/Relations/TSemantiqueRelation.cpp
+        Engine/3d/AutodeskObjLoader.cpp
+        Engine/3d/AutodeskObjLoader.hpp
 )
 
 option(ADD_UNITY_GLUE "Build the unity layer ?" OFF)
@@ -38,6 +40,8 @@ if(ADD_UNITY_GLUE)
             Swarmies/BusinessObjects/Geometry/Geometry.hpp
             Swarmies/BusinessObjects/Geometry/Mesh.cpp
             Swarmies/BusinessObjects/Geometry/Mesh.hpp
+            Engine/3d/AutodeskObjLoader.cpp
+            Engine/3d/AutodeskObjLoader.hpp
     )
 
 
@@ -89,6 +93,8 @@ if(BUILD_TESTING)
             Engine/Relations/Ordonanceur.cpp
             Engine/Relations/Ordonanceur.hpp
             Engine/Relations/TSemantiqueRelation.cpp
+            Engine/3d/AutodeskObjLoader.cpp
+            Engine/3d/AutodeskObjLoader.hpp
     )
     target_compile_definitions(${TEST_EXECUTABLE_NAME} PRIVATE SWARMIES_TESTING)
     target_compile_definitions(${TEST_EXECUTABLE_NAME} PRIVATE SWARMIES_TESTING)
