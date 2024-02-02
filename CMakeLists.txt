@@ -8,6 +8,9 @@ enable_testing()
 
 add_executable(Swarmies_Server
         main.cpp
+)
+
+add_library(SwarmLib STATIC
         Swarmies/BusinessObjects/Geometry/Geometry.cpp
         Swarmies/BusinessObjects/Geometry/Geometry.hpp
         Engine/Relations/PlayGame.cpp
@@ -26,9 +29,9 @@ add_executable(Swarmies_Server
         Engine/Relations/TRepository.cpp
         Engine/Relations/TRelations.cpp
         Engine/Relations/TSemantiqueRelation.cpp
-        Engine/3d/AutodeskObjLoader.cpp
-        Engine/3d/AutodeskObjLoader.hpp
 )
+
+target_link_libraries(Swarmies_Server PUBLIC SwarmLib)
 
 option(ADD_UNITY_GLUE "Build the unity layer ?" OFF)
 if(ADD_UNITY_GLUE)
@@ -36,14 +39,7 @@ if(ADD_UNITY_GLUE)
             Swarmies/Frontends/Unity3d/UnityGlue.cpp
             Swarmies/Frontends/IPlayGame.hpp
             Swarmies/Frontends/Unity3d/UnityGlue.hpp
-            Swarmies/BusinessObjects/Geometry/Geometry.cpp
-            Swarmies/BusinessObjects/Geometry/Geometry.hpp
-            Swarmies/BusinessObjects/Geometry/Mesh.cpp
-            Swarmies/BusinessObjects/Geometry/Mesh.hpp
-            Engine/3d/AutodeskObjLoader.cpp
-            Engine/3d/AutodeskObjLoader.hpp
     )
-
 
     set(UNITY_VERSION "2022.3.13f1" CACHE STRING "The folder name of the unity editor you use")
     set(UNITY_PROJECT_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/../UnityFront" CACHE PATH "The folder where the plugin should be copied to")
@@ -60,7 +56,9 @@ if(ADD_UNITY_GLUE)
             UnityGlue PUBLIC "/Applications/Unity/Hub/Editor/${UNITY_VERSION}/Unity.app/Contents/PluginAPI"
     )
 
-    target_link_libraries(Swarmies_Server UnityGlue)
+    target_link_libraries(Swarmies_Server PUBLIC UnityGlue)
+    target_link_libraries(UnityGlue PUBLIC SwarmLib)
+
 
     add_custom_command(TARGET UnityGlue POST_BUILD COMMAND
             ${CMAKE_COMMAND} -E copy_if_different

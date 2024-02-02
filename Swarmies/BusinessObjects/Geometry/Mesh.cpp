@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <cstring>
 
 #include "Mesh.hpp"
 

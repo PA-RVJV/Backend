@@ -29,7 +29,9 @@ namespace Engine {
     class TSemantiqueRelation: SemantiqueRelationBase {
     public:
         std::unordered_map<std::string, SemantiqueRelation::Kind> tags;
+#if SWARMIES_TESTING
         static void testSemantique();
+#endif
     };
 }
 
