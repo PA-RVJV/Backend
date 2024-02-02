@@ -32,7 +32,7 @@ add_library(SwarmLib STATIC
         Engine/3d/AutodeskObjLoader.cpp
 )
 
-add_subdirectory(../ThirdParty/Lua ../ThirdParty/_BUILD)
+add_subdirectory(ThirdParty/Lua)
 target_link_libraries(SwarmLib PUBLIC lua_static)
 
 target_link_libraries(Swarmies_Server PUBLIC SwarmLib)
