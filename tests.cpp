@@ -15,6 +15,22 @@
 #include "Swarmies/BusinessObjects/Mobile.hpp"
 #include "Engine/3d/AutodeskObjLoader.hpp"
 
+extern "C" {
+    #include <lua.h>
+    #include <lualib.h>
+    #include <lauxlib.h>
+}
+
+static int MyCppFunction(lua_State* L) {
+    const int num = lua_tonumber(L, 1);
+    const char* string = lua_tostring(L, 2);
+
+    printf("from lua %d %s\n", num, string);
+
+
+    return 0;   // number of params passed to lua
+}
+
 int main(int argc, char * argv[]) {
 
 
@@ -34,6 +50,20 @@ int main(int argc, char * argv[]) {
     Engine::test_ordonnanceur_works();
 
     testMultiMesh();
+
+    puts("testing lua");
+
+    lua_State *L = luaL_newstate();
+    luaL_openlibs(L);
+    lua_register(L, "CPPMyCppFunction", MyCppFunction);
+
+    int status = luaL_dofile(L, (path.parent_path().append("./Assets/LuaScripts/script.lua")).string().c_str());
+    if(status == LUA_OK) {
+        puts("lua file successfully exexuted");
+    } else {
+        puts("lua error");
+    }
+
 #else
     puts("\n*** Not in testing mode ***");
 #endif

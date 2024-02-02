@@ -1,0 +1,1 @@
+CPPMyCppFunction(42, "foo")

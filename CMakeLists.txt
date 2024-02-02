@@ -29,7 +29,11 @@ add_library(SwarmLib STATIC
         Engine/Relations/TRepository.cpp
         Engine/Relations/TRelations.cpp
         Engine/Relations/TSemantiqueRelation.cpp
+        Engine/3d/AutodeskObjLoader.cpp
 )
+
+add_subdirectory(../ThirdParty/Lua ../ThirdParty/_BUILD)
+target_link_libraries(SwarmLib PUBLIC lua_static)
 
 target_link_libraries(Swarmies_Server PUBLIC SwarmLib)
 
@@ -80,20 +84,8 @@ if(BUILD_TESTING)
     set(TEST_EXECUTABLE_NAME "TestsSwarmiesServer")
     add_executable(${TEST_EXECUTABLE_NAME}
             tests.cpp
-            Engine/Relations/TRepository.hpp
-            Engine/Relations/TRelations.hpp
-            Swarmies/BusinessObjects/Geometry/Mesh.hpp
-            Swarmies/BusinessObjects/Mobile.hpp
-            Swarmies/BusinessObjects/Geometry/Mesh.cpp
-            Swarmies/BusinessObjects/Geometry/Geometry.cpp
-            Engine/Relations/TRepository.cpp
-            Engine/Relations/TRelations.cpp
-            Engine/Relations/Ordonanceur.cpp
-            Engine/Relations/Ordonanceur.hpp
-            Engine/Relations/TSemantiqueRelation.cpp
-            Engine/3d/AutodeskObjLoader.cpp
-            Engine/3d/AutodeskObjLoader.hpp
     )
+    target_link_libraries(${TEST_EXECUTABLE_NAME} PUBLIC SwarmLib)
     target_compile_definitions(${TEST_EXECUTABLE_NAME} PRIVATE SWARMIES_TESTING)
     target_compile_definitions(${TEST_EXECUTABLE_NAME} PRIVATE SWARMIES_TESTING)
     add_custom_command(TARGET "${TEST_EXECUTABLE_NAME}" POST_BUILD
